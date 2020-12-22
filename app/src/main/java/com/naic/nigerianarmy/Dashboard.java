@@ -24,15 +24,15 @@ public class Dashboard extends AppCompatActivity {
 
 
     public void enroll(View view) {
-        startActivity(new Intent(this, BioMiniMain.class).putExtra("extra", "enroll"));
+        startActivity(new Intent(this, Enroll.class).putExtra("extra", "enroll"));
     }
 
     public void verify(View view) {
-        startActivity(new Intent(this, BioMiniMain.class).putExtra("extra", "verify"));
+        startActivity(new Intent(this, Login.class).putExtra("extra", "verify"));
     }
 
     public void dashboard(View view) {
-        startActivity(new Intent(this, BioMiniMain.class).putExtra("extra", "profile"));
+        startActivity(new Intent(this, Login.class).putExtra("extra", "profile"));
     }
 
     public void bippiis_web(View view) {

@@ -61,7 +61,7 @@ import java.nio.ByteBuffer;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-import static com.naic.nigerianarmy.BioMiniMain.ARGB2Gray;
+import static com.naic.nigerianarmy.Enroll.ARGB2Gray;
 
 
 public class GbExampleGrayScaleBitmapClass {

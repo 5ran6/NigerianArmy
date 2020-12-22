@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@color/background"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context=".BioMiniMain">
+    tools:context=".Enroll">
 
     <LinearLayout
         android:id="@+id/layoutInfo"

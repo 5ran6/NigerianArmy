@@ -1,5 +1,6 @@
 package com.naic.nigerianarmy;
 
+import android.annotation.SuppressLint;
 import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -30,15 +31,19 @@ import androidx.transition.Transition;
 import androidx.transition.TransitionValues;
 import androidx.viewpager.widget.ViewPager;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.greenbit.ansinistitl.Gban2000JavaWrapperLibrary;
 import com.greenbit.bozorth.BozorthJavaWrapperLibrary;
 import com.greenbit.gbfinimg.GbfinimgJavaWrapperLibrary;
-import com.greenbit.gbfrsw.GbfrswJavaWrapperDefinesImageFlags;
+import com.greenbit.gbfir.GbfirJavaWrapperLibrary;
 import com.greenbit.gbfrsw.GbfrswJavaWrapperLibrary;
 import com.greenbit.gbmsapi.GBMSAPIJavaWrapperLibrary;
 import com.greenbit.gbnfiq.GbNfiqJavaWrapperLibrary;
 import com.greenbit.gbnfiq2.GbNfiq2JavaWrapperLibrary;
+import com.greenbit.jpeg.GbjpegJavaWrapperLibrary;
 import com.greenbit.lfs.LfsJavaWrapperLibrary;
 import com.greenbit.usbPermission.IGreenbitLogger;
+import com.greenbit.wsq.WsqJavaWrapperLibrary;
 import com.naic.nigerianarmy.interfaces.BIPPIIS;
 import com.naic.nigerianarmy.models.FingerprintRequest;
 import com.naic.nigerianarmy.models.FingerprintResponse;
@@ -73,7 +78,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 import static com.naic.nigerianarmy.GbExampleGrayScaleBitmapClass.GetGreenbitDirectoryName;
 
 
-public class BioMiniMain extends AppCompatActivity
+public class Verify extends AppCompatActivity
         implements IGreenbitLogger {
     private int i = 0;
     //Flag.
@@ -87,7 +92,7 @@ public class BioMiniMain extends AppCompatActivity
     private static BioMiniFactory mBioMiniFactory = null;
     public static final int REQUEST_WRITE_PERMISSION = 786;
     public IBioMiniDevice mCurrentDevice = null;
-    private BioMiniMain mainContext;
+    private Verify mainContext;
 
     public final static String TAG = "fingerprint";
     private EditText mLogView;
@@ -95,8 +100,8 @@ public class BioMiniMain extends AppCompatActivity
     private GifImageView img;
     private TextView report, name;
     private ViewPager mPager;
-    private String token = "", firebase_token = "", fullname = "";
-
+    private String token = "", fullname = "";
+    private FloatingActionButton upload;
     private String bippiis_number = "";
     private String bippiis_number_edited = "";
 
@@ -113,7 +118,7 @@ public class BioMiniMain extends AppCompatActivity
 
     @Override
     public void LogAsDialog(String s) {
-        Tools.toast(s, BioMiniMain.this);
+        Tools.toast(s, Verify.this);
     }
 
     class UserData {
@@ -140,6 +145,8 @@ public class BioMiniMain extends AppCompatActivity
             runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
+                    report.setText("Verifying...");
+
                     if (capturedImage != null) {
 
                         ImageView iv = findViewById(R.id.imagePreview);
@@ -155,7 +162,7 @@ public class BioMiniMain extends AppCompatActivity
                             byte[] byteArray = stream.toByteArray();
 
 
-//                            byte[] bmp = mCurrentDevice.getCaptureImageAsBmp();
+                            //                            byte[] bmp = mCurrentDevice.getCaptureImageAsBmp();
 
                             if (bmp == null) {
                                 log("<<ERROR>> Cannot get BMP buffer");
@@ -164,7 +171,7 @@ public class BioMiniMain extends AppCompatActivity
                             }
                             try {
                                 File file = new File(GetGreenbitDirectoryName(),
-                                        bippiis_number_edited + ".png");
+                                        bippiis_number_edited);
                                 FileOutputStream fos = new FileOutputStream(file);
                                 fos.write(byteArray);
                                 fos.close();
@@ -173,7 +180,7 @@ public class BioMiniMain extends AppCompatActivity
                             } catch (IOException e) {
                                 e.printStackTrace();
                             }
-
+                            report.setText("Verifying...");
 
                             //create Gb fingerprint class
                             GbExampleGrayScaleBitmapClass bmpCls =
@@ -186,15 +193,19 @@ public class BioMiniMain extends AppCompatActivity
                             Log.i("Check img size", "Real SizeX = " + (
                                     bmpCls.sx));
                             try {
-                                //      bmpCls.GBBmpFromJpegBuffer(bmp, false, false, BioMiniMain.this);
+                                //      bmpCls.GBBmpFromJpegBuffer(bmp, false, false, Verify.this);
 
-                                bmpCls.EncodeToLFSMinutiae(
-                                        GB_AcquisitionOptionsGlobals.GetTemplateFileName(bippiis_number_edited + i++), GbfrswJavaWrapperDefinesImageFlags.GBFRSW_FLAT_IMAGE, BioMiniMain.this);
-                                //if (ret)
-                                printState("Enrolled Successfully");
-                                report.setText("Captured Successfully");
-//                                else
-//                                    printState("Not Enrolled Successfully");
+                                //                                boolean ret = bmpCls.TestLfsBozorth1();
+                                boolean ret = bmpCls.Verify(Verify.this);
+                                //    Toast.makeText(getApplicationContext(), "RetVal = " + ret, Toast.LENGTH_SHORT).show();
+                                if (ret) {
+                                    printState("Enrolled Successfully");
+                                    report.setText("Verified Successfully!");
+
+                                } else {
+                                    printState("Not Enrolled Successfully");
+                                    report.setText("Not Enrolled");
+                                }
                             } catch (Exception e) {
                                 e.printStackTrace();
                             }
@@ -214,7 +225,7 @@ public class BioMiniMain extends AppCompatActivity
             if (errorCode != IBioMiniDevice.ErrorCode.OK.value()) {
 
                 printState(getResources().getText(R.string.capture_single_fail) + "(" + error + ")");
-//                report.setText("Error: Capture again");
+                //                report.setText("Error: Capture again");
             }
 
         }
@@ -224,7 +235,7 @@ public class BioMiniMain extends AppCompatActivity
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
-//                ((TextView) findViewById(R.id.tv)).setText(str);
+                //                ((TextView) findViewById(R.id.tv)).setText(str);
                 log(str.toString());
             }
         });
@@ -278,6 +289,7 @@ public class BioMiniMain extends AppCompatActivity
 
     }
 
+    @SuppressLint("RestrictedApi")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -285,13 +297,16 @@ public class BioMiniMain extends AppCompatActivity
 
 
         GB_AcquisitionOptionsGlobals.GBMSAPI_Jw = new GBMSAPIJavaWrapperLibrary();
+        GB_AcquisitionOptionsGlobals.WSQ_Jw = new WsqJavaWrapperLibrary();
         GB_AcquisitionOptionsGlobals.GBFRSW_Jw = new GbfrswJavaWrapperLibrary();
         GB_AcquisitionOptionsGlobals.GBFINIMG_Jw = new GbfinimgJavaWrapperLibrary();
+        GB_AcquisitionOptionsGlobals.Jpeg_Jw = new GbjpegJavaWrapperLibrary();
+        GB_AcquisitionOptionsGlobals.AN2000_Jw = new Gban2000JavaWrapperLibrary();
+        GB_AcquisitionOptionsGlobals.GBFIR_Jw = new GbfirJavaWrapperLibrary();
         GB_AcquisitionOptionsGlobals.GBNFIQ_Jw = new GbNfiqJavaWrapperLibrary();
         GB_AcquisitionOptionsGlobals.GBNFIQ2_Jw = new GbNfiq2JavaWrapperLibrary();
         GB_AcquisitionOptionsGlobals.LFS_Jw = new LfsJavaWrapperLibrary();
         GB_AcquisitionOptionsGlobals.BOZORTH_Jw = new BozorthJavaWrapperLibrary();
-        GB_AcquisitionOptionsGlobals.LFS_Jw.Load();
 
         setContentView(R.layout.activity_enroll);
 
@@ -299,7 +314,6 @@ public class BioMiniMain extends AppCompatActivity
         bippiis_number = getIntent().getStringExtra("bippiis_number");
         bippiis_number_edited = getIntent().getStringExtra("bippiis_number_edited");
         token = getIntent().getStringExtra("token");
-        firebase_token = getIntent().getStringExtra("firebase_token");
         fullname = getIntent().getStringExtra("fullname");
 
         Log.d("fingerprint", "B: " + bippiis_number + ", BE: " + bippiis_number_edited + ", T: " + token + ", F: " + fullname);
@@ -307,7 +321,9 @@ public class BioMiniMain extends AppCompatActivity
         img = findViewById(R.id.logo);
         report = findViewById(R.id.tv);
         name = findViewById(R.id.fullname);
-        name.setText("Welcome " + fullname);
+        upload = findViewById(R.id.upload);
+        upload.setVisibility(View.GONE);
+        name.setText("Welcome, " + fullname);
 
         final Animation animation = new AlphaAnimation(1, 0); // Change alpha from fully visible to invisible
         new Transition() {
@@ -327,14 +343,14 @@ public class BioMiniMain extends AppCompatActivity
         animation.setRepeatMode(Animation.REVERSE); // Reverse animation at the end so the button will fade back in
         img.startAnimation(animation);
 
-/*
-        int RetVal = GB_AcquisitionOptionsGlobals.Jpeg_Jw.Load();
-        if (RetVal == GbjpegJavaWrapperDefinesReturnCodes.GBJPEG_OK) {
-            Log.d("fingerprint", "Jpeg Load ok");
-        } else {
-            Log.d("fingerprint", "Jpeg Load Failure: " + GB_AcquisitionOptionsGlobals.Jpeg_Jw.GetLastErrorString());
-        }
-*/
+ /*
+         int RetVal = GB_AcquisitionOptionsGlobals.Jpeg_Jw.Load();
+         if (RetVal == GbjpegJavaWrapperDefinesReturnCodes.GBJPEG_OK) {
+             Log.d("fingerprint", "Jpeg Load ok");
+         } else {
+             Log.d("fingerprint", "Jpeg Load Failure: " + GB_AcquisitionOptionsGlobals.Jpeg_Jw.GetLastErrorString());
+         }
+ */
 
         // Auto generated above
         mainContext = this;
@@ -440,7 +456,7 @@ public class BioMiniMain extends AppCompatActivity
             registerReceiver(mUsbReceiver, filter);
             checkDevice();
         } else {
-//            Toast.makeText(getApplicationContext(), "USBManager: Permission not given", Toast.LENGTH_SHORT).show();
+            //            Toast.makeText(getApplicationContext(), "USBManager: Permission not given", Toast.LENGTH_SHORT).show();
             mBioMiniFactory = new BioMiniFactory(mainContext) {
                 @Override
                 public void onDeviceChange(DeviceChangeEvent event, Object dev) {
@@ -519,7 +535,7 @@ public class BioMiniMain extends AppCompatActivity
 
     public void doExitApp() {
         if ((System.currentTimeMillis() - exitTime) > 1500) {
-            Tools.toast("Press again to CANCEL enrollment", BioMiniMain.this);
+            Tools.toast("Press again to CANCEL enrollment", Verify.this);
             exitTime = System.currentTimeMillis();
         } else {
             finishAffinity();
@@ -534,7 +550,7 @@ public class BioMiniMain extends AppCompatActivity
     public void goingBack() {
         AlertDialog.Builder builder
                 = new AlertDialog
-                .Builder(BioMiniMain.this);
+                .Builder(Verify.this);
 
         // Set the message show for the Alert time
         builder.setMessage("Going back without uploading?");
@@ -577,7 +593,7 @@ public class BioMiniMain extends AppCompatActivity
         if (storageFile.fingerPrint.getAllFingerprints().size() > 4) {
             AlertDialog.Builder builder
                     = new AlertDialog
-                    .Builder(BioMiniMain.this);
+                    .Builder(Verify.this);
 
             // Set the message show for the Alert time
             builder.setMessage("Are you done and want to upload?");
@@ -634,7 +650,6 @@ public class BioMiniMain extends AppCompatActivity
         Log.d("fingerprint", "Number of fingerprints = " + fingerprints_array.size());
         Log.d("fingerprint", "Number of fingerprints Images= " + fingerprints_images_array.size());
         //retrofit
-        //retrofit
 
         OkHttpClient client = new OkHttpClient.Builder().addInterceptor(chain -> {
             Request newRequest = chain.request().newBuilder()
@@ -652,8 +667,6 @@ public class BioMiniMain extends AppCompatActivity
         FingerprintRequest fingerprintRequest = new FingerprintRequest();
         //fingerprintRequest.setBippiis_number(bippiis_number_edited);
         fingerprintRequest.setBippiis_number(bippiis_number);
-        fingerprintRequest.setFirebaseToken(firebase_token);
-
 
         fingerprintRequest.setFingerprints(storageFile.fingerPrint.allFingerprints);
         fingerprintRequest.setFingerprintsImages(storageFileImages.fingerPrintImages.allFingerprintsImages);
@@ -675,8 +688,8 @@ public class BioMiniMain extends AppCompatActivity
                 try {
                     Log.d("fingerprint", "fingerPrintResponse success: " + response.isSuccessful());
                     Log.d("fingerprint", "fingerPrintResponse RESPONSE: " + response.toString());
-//                    Log.d("fingerprint", "fingerPrintResponse TOKEN: " + response.body().getToken());
-//                    Log.d("fingerprint", "fingerPrintResponse BODY: " + response.body().toString());
+                    //                    Log.d("fingerprint", "fingerPrintResponse TOKEN: " + response.body().getToken());
+                    //                    Log.d("fingerprint", "fingerPrintResponse BODY: " + response.body().toString());
 
 
                     //TODO: remove later
@@ -732,24 +745,24 @@ public class BioMiniMain extends AppCompatActivity
     //DONE
     public void fab(View view) {
         // do something
-        startActivity(new Intent(getApplicationContext(), BioMiniMain.class));
+        startActivity(new Intent(getApplicationContext(), Verify.class));
 
-//        if (mCurrentDevice != null) {
-//            new Thread(new Runnable() {
-//                @Override
-//                public void run() {
-//                    mCurrentDevice.abortCapturing();
-//                    int nRetryCount = 0;
-//                    while (mCurrentDevice != null && mCurrentDevice.isCapturing()) {
-//                        SystemClock.sleep(10);
-//                        nRetryCount++;
-//                    }
-//                    Log.d("AbortCapturing", String.format(Locale.ENGLISH,
-//                            "IsCapturing return false.(Abort-lead time: %dms) ",
-//                            nRetryCount * 10));
-//                }
-//            }).start();
-//        }
+        //        if (mCurrentDevice != null) {
+        //            new Thread(new Runnable() {
+        //                @Override
+        //                public void run() {
+        //                    mCurrentDevice.abortCapturing();
+        //                    int nRetryCount = 0;
+        //                    while (mCurrentDevice != null && mCurrentDevice.isCapturing()) {
+        //                        SystemClock.sleep(10);
+        //                        nRetryCount++;
+        //                    }
+        //                    Log.d("AbortCapturing", String.format(Locale.ENGLISH,
+        //                            "IsCapturing return false.(Abort-lead time: %dms) ",
+        //                            nRetryCount * 10));
+        //                }
+        //            }).start();
+        //        }
     }
 
 
@@ -790,7 +803,7 @@ public class BioMiniMain extends AppCompatActivity
             boolean loaded = bmpToShow.GbBmpFromBmpFile(filename, true, true);
             //  boolean loaded = bmpToShow.GbBmpFromBmp(bitmap, true, true);
             if (loaded) {
-//                LogBitmap(bmpToShow);
+                //                LogBitmap(bmpToShow);
                 LogAsDialog(funcName + ": Loaded from bmp");
                 bmpToShow.TestLfsBozorth1();
             } else {

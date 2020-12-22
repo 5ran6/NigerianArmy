@@ -111,8 +111,7 @@ public class CameraCapture extends AppCompatActivity {
                 }
                 Log.d("fingerprint", "Deleted Greenbit folder successfully");
             }
-//            startActivity(new Intent(getApplicationContext(), PrinterActivity.class).putExtra("image", byteArray).putExtra("token", token));
-
+            startActivity(new Intent(getApplicationContext(), BioData.class));
         } else
             uploadImage();
     }
