@@ -22,8 +22,6 @@ import org.apache.commons.lang3.SerializationUtils;
 
 
 public class Splash extends AppCompatActivity {
-    private ProgressBar progressBar;
-    private AppCompatImageView img;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,8 +43,7 @@ public class Splash extends AppCompatActivity {
 //            }
 //        });
 
-        progressBar = findViewById(R.id.progress);
-        img = findViewById(R.id.img);
+        AppCompatImageView img = findViewById(R.id.img);
 
 
         final Animation animation = new AlphaAnimation(1, 0); // Change alpha from fully visible to invisible
@@ -80,7 +77,6 @@ public class Splash extends AppCompatActivity {
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
     }
 
-
     private long exitTime = 0;
 
     public void doExitApp() {
@@ -90,7 +86,6 @@ public class Splash extends AppCompatActivity {
         } else {
             finishAffinity();
         }
-
     }
 
 
@@ -102,5 +97,4 @@ public class Splash extends AppCompatActivity {
     private LfsJavaWrapperDefinesMinutiaN[] deSerialize(byte[] templateCode) {
         return SerializationUtils.deserialize(templateCode);
     }
-
 }

@@ -77,5 +77,6 @@
     <string name="tab_text_2">Next of Kin\'s Information</string>
     <string name="tab_text_3">Employment Information</string>
     <string name="tab_text_4">Payment Information</string>
+    <string name="city_ng">Abuja, NG</string>
 
 </resources>

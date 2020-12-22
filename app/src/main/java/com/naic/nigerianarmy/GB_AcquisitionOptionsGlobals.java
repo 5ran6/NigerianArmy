@@ -24,17 +24,17 @@ public class GB_AcquisitionOptionsGlobals {
     /////////////////////////////////////
     // GENERAL UTILITY
     /////////////////////////////////////
-    public static void CreateDialogNeutral(String title, AppCompatActivity act)
-    {
-//        AlertDialog.Builder builder = new AlertDialog.Builder(act);
-//        builder.setNegativeButton("Ok",null);
-//        AlertDialog dialog = builder.create();
-//        dialog.setTitle(title);
-//        dialog.show();
-		LogWindow.LogStr = title;
-		Intent intent = new Intent(act, LogWindow.class);
-		act.startActivity(intent);
-    }
+//    public static void CreateDialogNeutral(String title, AppCompatActivity act)
+//    {
+////        AlertDialog.Builder builder = new AlertDialog.Builder(act);
+////        builder.setNegativeButton("Ok",null);
+////        AlertDialog dialog = builder.create();
+////        dialog.setTitle(title);
+////        dialog.show();
+//		LogWindow.LogStr = title;
+//		Intent intent = new Intent(act, LogWindow.class);
+//		act.startActivity(intent);
+//    }
 
     /////////////////////////////////////
     // GBMSAPI

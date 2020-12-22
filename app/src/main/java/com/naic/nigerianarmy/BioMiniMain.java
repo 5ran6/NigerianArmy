@@ -307,7 +307,7 @@ public class BioMiniMain extends AppCompatActivity
         img = findViewById(R.id.logo);
         report = findViewById(R.id.tv);
         name = findViewById(R.id.fullname);
-        name.setText("Welcome, " + fullname);
+        name.setText("Welcome " + fullname);
 
         final Animation animation = new AlphaAnimation(1, 0); // Change alpha from fully visible to invisible
         new Transition() {

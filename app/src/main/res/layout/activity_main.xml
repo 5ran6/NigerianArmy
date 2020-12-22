@@ -46,7 +46,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/spacing_middle"
                 android:gravity="center"
-                android:text="Nigeria Army Recruitment and Verification System"
+                android:text="Nigerian Army Recruitment and Verification System"
                 android:textAppearance="@style/Base.TextAppearance.AppCompat.Title"
                 android:textColor="@color/grey_90" />
 
@@ -69,7 +69,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Abuja, NG"
+                    android:text="@string/city_ng"
                     android:textAppearance="@style/TextAppearance.AppCompat.Body1"
                     android:textColor="@color/grey_40" />
             </LinearLayout>

@@ -48,7 +48,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/spacing_middle"
                 android:gravity="center"
-                android:text="Nigeria Army Recruitment and Verification System"
+                android:text="Nigerian Army Recruitment and Verification System"
                 android:textAppearance="@style/Base.TextAppearance.AppCompat.Title"
                 android:textColor="@color/grey_90" />
 
