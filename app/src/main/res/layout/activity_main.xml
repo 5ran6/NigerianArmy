@@ -1,0 +1,323 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background"
+    android:orientation="vertical"
+    tools:context=".Dashboard">
+
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/nested_content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:clipToPadding="false"
+        android:orientation="vertical"
+        android:scrollbars="none"
+        android:scrollingCache="true"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="120dp"
+                android:foreground="@color/overlay_dark_30"
+                android:scaleType="centerCrop"
+                android:src="@drawable/logo" />
+
+            <com.mikhaellopez.circularimageview.CircularImageView
+                android:id="@+id/image"
+                android:layout_width="90dp"
+                android:layout_height="90dp"
+                android:layout_marginTop="-45dp"
+                android:src="@drawable/logo"
+                app:civ_border="true"
+                app:civ_border_color="@color/grey_10"
+                app:civ_border_width="2dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/spacing_middle"
+                android:gravity="center"
+                android:text="Nigeria Army Recruitment and Verification System"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Title"
+                android:textColor="@color/grey_90" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/spacing_medium"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="@dimen/spacing_large"
+                    android:layout_height="@dimen/spacing_large"
+                    android:layout_marginEnd="@dimen/spacing_medium"
+                    android:layout_marginRight="@dimen/spacing_medium"
+                    app:srcCompat="@drawable/ic_location"
+                    app:tint="@color/grey_40"
+                    tools:ignore="VectorDrawableCompat" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Abuja, NG"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                    android:textColor="@color/grey_40" />
+            </LinearLayout>
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="@dimen/spacing_xxxlarge" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:gravity="center"
+                android:layout_gravity="end"
+                >
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_horizontal"
+                    android:orientation="horizontal"
+                    android:padding="@dimen/spacing_large">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:minWidth="100dp"
+                        android:orientation="vertical">
+
+                        <com.google.android.material.floatingactionbutton.FloatingActionButton
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:clickable="true"
+                            android:onClick="enroll"
+                            android:tint="@color/grey_80"
+                            app:backgroundTint="@android:color/white"
+                            app:elevation="1dp"
+                            app:fabSize="normal"
+                            app:fabCustomSize="100dp"
+                            app:maxImageSize="@dimen/spacing_xxlarge"
+                            app:rippleColor="@color/deep_orange_400"
+                            app:srcCompat="@drawable/ic_fingerprint_black_24dp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/spacing_medium"
+                            android:text="Enroll"
+                            android:textAppearance="@style/Base.TextAppearance.AppCompat.Body2" />
+
+                    </LinearLayout>
+                    <View
+                        android:layout_width="25dp"
+                        android:layout_height="@dimen/spacing_xxxlarge" />
+
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:minWidth="100dp"
+                        android:orientation="vertical">
+
+                        <com.google.android.material.floatingactionbutton.FloatingActionButton
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:clickable="true"
+                            android:onClick="verify"
+                            android:tint="@color/grey_80"
+                            app:backgroundTint="@android:color/white"
+                            app:elevation="1dp"
+                            app:fabCustomSize="100dp"
+                            app:maxImageSize="@dimen/spacing_xxlarge"
+                            app:fabSize="normal"
+                            app:rippleColor="@color/deep_orange_400"
+                            app:srcCompat="@drawable/ic_person_black_24dp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/spacing_medium"
+                            android:text="Verify"
+                            android:textAppearance="@style/Base.TextAppearance.AppCompat.Body2" />
+
+                    </LinearLayout>
+                    <View
+                        android:layout_width="25dp"
+                        android:layout_height="@dimen/spacing_xxxlarge" />
+
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:minWidth="100dp"
+                        android:orientation="vertical">
+
+                        <com.google.android.material.floatingactionbutton.FloatingActionButton
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:clickable="true"
+                            android:onClick="dashboard"
+                            app:fabCustomSize="100dp"
+                            app:maxImageSize="@dimen/spacing_xxlarge"
+                            android:tint="@color/grey_80"
+                            app:backgroundTint="@android:color/white"
+                            app:elevation="1dp"
+                            app:fabSize="normal"
+                            app:rippleColor="@color/deep_orange_400"
+                            app:srcCompat="@drawable/ic_folder_shared_black_24dp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/spacing_medium"
+                            android:text="Profile"
+                            android:textAppearance="@style/Base.TextAppearance.AppCompat.Body2" />
+
+                    </LinearLayout>
+
+                </LinearLayout>
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/spacing_large" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_horizontal"
+                    android:orientation="horizontal"
+                    android:padding="@dimen/spacing_large">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:minWidth="100dp"
+                        android:orientation="vertical">
+
+                        <com.google.android.material.floatingactionbutton.FloatingActionButton
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:clickable="true"
+                            android:onClick="bippiis_web"
+                            android:tint="@color/grey_80"
+                            app:backgroundTint="@android:color/white"
+                            app:elevation="1dp"
+                            app:fabCustomSize="100dp"
+                            app:fabSize="normal"
+                            app:maxImageSize="@dimen/spacing_xxlarge"
+                            app:rippleColor="@color/deep_orange_400"
+                            app:srcCompat="@drawable/ic_language_black_24dp"
+                            tools:ignore="VectorDrawableCompat" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/spacing_medium"
+                            android:text="NAIC"
+                            android:textAppearance="@style/Base.TextAppearance.AppCompat.Body2" />
+
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="25dp"
+                        android:layout_height="@dimen/spacing_xxxlarge" />
+
+                        <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:minWidth="100dp"
+                        android:orientation="vertical">
+
+                        <com.google.android.material.floatingactionbutton.FloatingActionButton
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:clickable="true"
+                            android:onClick="about"
+                            android:tint="@color/grey_80"
+                            app:backgroundTint="@android:color/white"
+                            app:elevation="1dp"
+                            app:fabCustomSize="100dp"
+                            app:maxImageSize="@dimen/spacing_xxlarge"
+                            app:fabSize="normal"
+                            app:rippleColor="@color/deep_orange_400"
+                            app:srcCompat="@drawable/ic_info" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/spacing_medium"
+                            android:text="About"
+                            android:textAppearance="@style/Base.TextAppearance.AppCompat.Body2" />
+
+                    </LinearLayout>
+                    <View
+                        android:layout_width="25dp"
+                        android:layout_height="@dimen/spacing_xxxlarge" />
+
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:minWidth="100dp"
+                        android:orientation="vertical">
+
+                        <com.google.android.material.floatingactionbutton.FloatingActionButton
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:clickable="true"
+                            android:onClick="exitApp"
+                            android:tint="@color/grey_80"
+                            app:backgroundTint="@android:color/white"
+                            app:fabCustomSize="100dp"
+                            app:maxImageSize="@dimen/spacing_xxlarge"
+                            app:elevation="1dp"
+                            app:fabSize="normal"
+                            app:rippleColor="@color/deep_orange_400"
+                            app:srcCompat="@drawable/ic_exit_to_app_black_24dp"
+                            tools:ignore="VectorDrawableCompat" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/spacing_medium"
+                            android:text="Exit"
+                            android:textAppearance="@style/Base.TextAppearance.AppCompat.Body2" />
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal|bottom"
+                android:gravity="center"
+                android:text="Powered by NAIC"
+                android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                android:textColor="@color/grey_40"
+                android:textStyle="italic" />
+        </LinearLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

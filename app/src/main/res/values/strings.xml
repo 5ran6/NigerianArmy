@@ -1,0 +1,81 @@
+<resources>
+    <string name="app_name">Nigerian Army</string>
+    <string name="about_text">Automation and integration of real time biometric verification and identification system for the Nigeria Army on a central database. Having a unique staff-identifier-link to their profile, and biometric verification, with encrypted grade level/step status on the payroll. This eliminates the cases of ghost workers and other forms of fraudulent activities.</string>
+    <string name="base_url">https://bippiis.com/api/v1/</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="action_settings">Settings</string>
+
+    <string name="checkdevice"> Check Device </string>
+    <string name="capturesingle">Capture Single</string>
+    <string name="start_capture">Start Capturing</string>
+    <string name="abort_capture">Abort Capture</string>
+
+    <string name="label_capture">CheckDevice and Capture</string>
+    <string name="save_as_bmp">Save as BMP</string>
+    <string name="save_as_wsq">Save as WSQ</string>
+    <string name="save_template">Save Template</string>
+    <string name="save_as_19794_4">Save as 19794_4</string>
+
+    <string name="capture_ok">Capture OK</string>
+    <string name="capture_fail">Capture Fail</string>
+
+    <string name="capture_single_ok">Wait! Enrolling.....</string>
+    <string name="capture_single_fail">Capture Single Fail</string>
+
+    <string name="start_capture_ok">StartCapture OK</string>
+    <string name="start_capture_fail">StartCapture Fail</string>
+
+    <string name="enroll_ok">Enrollment OK</string>
+    <string name="enroll_fail">Enrollment FAIL</string>
+
+    <string name="verify_ok">Verify OK</string>
+    <string name="verify_fail">Verify FAIL</string>
+    <string name="verify_not_match">Verify template not match</string>
+
+    <string name="delete_user">Clear user list</string>
+
+    <string name="no_user_name">There is no user name.</string>
+
+    <string name="export_bmp_ok">Export BMP OK</string>
+    <string name="export_bmp_fail">Export BMP FAIL</string>
+
+    <string name="export_wsq_ok">Export WSQ OK</string>
+    <string name="export_wsq_fail">Export WSQ FAIL</string>
+
+    <string name="export_template_ok">Export Template OK</string>
+    <string name="export_template_fail">Export Template FAIL</string>
+
+    <string name="export_19794_4_ok">Export 19794_4 OK</string>
+    <string name="export_19794_4_fail">Export 19794_4 FAIL</string>
+
+    <string name="read_params_ok">Read Parameters OK</string>
+    <string name="read_params_fail">Read Paramters FAIL</string>
+
+    <string name="write_params_ok">Write Parameters OK</string>
+    <string name="write_params_fail">Write Parameters FAIL</string>
+    <string name="title_activity_device_settings">Settings</string>
+    <string name="title_activity_acquisition_settings">AcquisitionSettings</string>
+    <string name="title_activity_device_features">Device Features</string>
+    <string name="title_activity_flat_acquisition_options">FlatAcquisitionOptions</string>
+    <string name="title_activity_slap_acquisition_options">SlapAcquisitionOptions</string>
+    <string name="title_activity_roll_acquisiton_options">RollAcquisitonOptions</string>
+    <string name="title_activity_frame_rate_settings">frame_rate_settings</string>
+    <string name="title_activity_dacty_match_settings">DactyMatch Settings</string>
+    <string name="title_activity_wsq_window">WsqWindow</string>
+    <string name="title_activity_jp2_window">Jp2Window</string>
+    <string name="title_activity_gbfinimg_window">GbfinimgWindow</string>
+    <string name="title_activity_segments_info_window">SegmentsInfoWindow</string>
+    <string name="title_activity_gb_an2000_settings">GbAn2000Settings</string>
+    <string name="title_activity_log_window">LogWindow</string>
+    <string name="header_1">Firstly</string>
+    <string name="title_activity_profiles">Profile</string>
+
+
+    <string name="tab_text_1">Personal Information</string>
+    <string name="tab_text_2">Next of Kin\'s Information</string>
+    <string name="tab_text_3">Employment Information</string>
+    <string name="tab_text_4">Payment Information</string>
+
+</resources>

@@ -1,0 +1,91 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 30
+    buildToolsVersion "30.0.0"
+
+    defaultConfig {
+        applicationId "com.naic.nigerianarmy"
+        minSdkVersion 19
+        targetSdkVersion 30
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+        vectorDrawables.useSupportLibrary = true
+        multiDexEnabled true
+        externalNativeBuild {
+            ndk {
+                abiFilters 'armeabi-v7a', 'armeabi', 'arm64-v8a', 'x86', 'x86_64'
+                ldLibs "log"
+            }
+            // end GREENBIT ADDS
+        }
+
+
+    aaptOptions.cruncherEnabled = false
+    aaptOptions.useNewCruncher = false
+
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: "libs", include: ["*.jar"])
+    implementation 'androidx.appcompat:appcompat:1.2.0'
+    implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.2'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
+
+    implementation 'com.google.android.material:material:1.0.0'
+    implementation 'androidx.viewpager:viewpager:1.0.0'
+    implementation files('libs/multiscan.jar')
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+    // third party dependencies -------------------------------------------------------------------
+    implementation 'pl.droidsonroids.gif:android-gif-drawable:1.1.17'
+    implementation 'com.balysv:material-ripple:1.0.2'
+    // ripple effect
+    implementation 'com.github.bumptech.glide:glide:3.7.0'
+    // image loader
+    implementation 'com.wdullaer:materialdatetimepicker:3.2.0'
+    // date & time picker
+    implementation 'com.mikhaellopez:circularimageview:3.0.2'
+    // circle image view
+    implementation 'com.hootsuite.android:nachos:1.1.1'
+    // material chips
+    implementation 'com.google.android:flexbox:0.3.2'
+    // google flexible box
+    //api
+    implementation 'com.google.code.gson:gson:2.8.5'
+    implementation 'com.squareup.retrofit2:retrofit:2.7.1'
+    implementation 'com.theartofdev.edmodo:android-image-cropper:2.6.0'
+    implementation 'com.squareup.retrofit2:converter-gson:2.1.0'
+    // https://mvnrepository.com/artifact/commons-io/commons-io
+    implementation 'commons-io:commons-io:2.6'
+    // https://mvnrepository.com/artifact/com.googlecode.json-simple/json-simple
+    implementation 'com.googlecode.json-simple:json-simple:1.1.1'
+    implementation 'org.apache.commons:commons-text:1.6'
+    implementation 'com.ogaclejapan.smarttablayout:library:2.0.0@aar'
+    implementation 'com.google.firebase:firebase-iid:20.2.4'
+    implementation 'com.google.firebase:firebase-analytics:17.5.0'
+
+    implementation files('libs/multiscan.jar')
+    implementation files('libs/telpo_api.jar')
+    implementation project(':libBioMini_v20')
+
+    //Optional: see how to use the utility.
+    implementation 'com.ogaclejapan.smarttablayout:utils-v4:2.0.0@aar'
+
+}
