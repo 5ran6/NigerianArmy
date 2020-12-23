@@ -78,5 +78,6 @@
     <string name="tab_text_3">Employment Information</string>
     <string name="tab_text_4">Payment Information</string>
     <string name="city_ng">Abuja, NG</string>
+    <string name="content_description_end_icon">Please fill all fields</string>
 
 </resources>
