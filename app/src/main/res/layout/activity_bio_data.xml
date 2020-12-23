@@ -14,6 +14,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:clickable="false"
         android:orientation="vertical">
 
         <ImageView
@@ -48,16 +49,18 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Full Name"
-                android:inputType="textCapWords" />
+                android:inputType="textCapWords"
+                 />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Age"
-            app:startIconDrawable="@drawable/ic_baseline_cake_24"     android:padding="@dimen/spacing_small"
+            android:padding="@dimen/spacing_small"
+            app:counterEnabled="false"
 
-            app:counterEnabled="false">
+            app:startIconDrawable="@drawable/ic_baseline_cake_24">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/age"
@@ -72,8 +75,8 @@
             android:layout_height="wrap_content"
             android:hint="Phone"
             android:padding="@dimen/spacing_small"
-            app:startIconDrawable="@drawable/ic_baseline_call_24"
-            app:counterEnabled="false">
+            app:counterEnabled="false"
+            app:startIconDrawable="@drawable/ic_baseline_call_24">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/phone"
@@ -90,9 +93,9 @@
             android:hint="Height"
             android:padding="@dimen/spacing_small"
 
-            app:startIconDrawable="@drawable/ic_baseline_height_24"
             app:counterEnabled="true"
-            app:counterMaxLength="6">
+            app:counterMaxLength="6"
+            app:startIconDrawable="@drawable/ic_baseline_height_24">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/height"
@@ -107,9 +110,9 @@
             android:layout_height="wrap_content"
             android:hint="Weight"
             android:padding="@dimen/spacing_small"
-            app:startIconDrawable="@drawable/ic_baseline_grain_24"
             app:counterEnabled="true"
-            app:counterMaxLength="6">
+            app:counterMaxLength="6"
+            app:startIconDrawable="@drawable/ic_baseline_grain_24">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/weight"
@@ -125,8 +128,8 @@
             android:layout_height="wrap_content"
             android:hint="Eye Colour"
             android:padding="@dimen/spacing_small"
-            app:startIconDrawable="@drawable/ic_baseline_remove_red_eye_24"
-            app:counterEnabled="false">
+            app:counterEnabled="false"
+            app:startIconDrawable="@drawable/ic_baseline_remove_red_eye_24">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/eye_colour"
@@ -141,8 +144,8 @@
             android:layout_height="wrap_content"
             android:hint="Hair Colour"
             android:padding="@dimen/spacing_small"
-            app:startIconDrawable="@drawable/ic_view_headline_black_24dp"
-            app:counterEnabled="false">
+            app:counterEnabled="false"
+            app:startIconDrawable="@drawable/ic_view_headline_black_24dp">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/hair_colour"
@@ -157,8 +160,8 @@
             android:layout_height="wrap_content"
             android:hint="Tatoo/Tribal Marks?"
             android:padding="@dimen/spacing_small"
-            app:startIconDrawable="@drawable/ic_baseline_emoji_emotions_24"
-            app:counterEnabled="false">
+            app:counterEnabled="false"
+            app:startIconDrawable="@drawable/ic_baseline_emoji_emotions_24">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/tatoo"
@@ -174,8 +177,8 @@
             android:layout_height="wrap_content"
             android:hint="Gender"
             android:padding="@dimen/spacing_small"
-            app:startIconDrawable="@drawable/ic_baseline_people_24"
-            app:counterEnabled="false">
+            app:counterEnabled="false"
+            app:startIconDrawable="@drawable/ic_baseline_people_24">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/gender"
@@ -190,8 +193,8 @@
             android:layout_height="wrap_content"
             android:hint="Marital Status"
             android:padding="@dimen/spacing_small"
-            app:startIconDrawable="@drawable/ic_baseline_people_outline_24"
-            app:counterEnabled="false">
+            app:counterEnabled="false"
+            app:startIconDrawable="@drawable/ic_baseline_people_outline_24">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/marital"
@@ -206,8 +209,8 @@
             android:layout_height="wrap_content"
             android:hint="Blood Group"
             android:padding="@dimen/spacing_small"
-            app:startIconDrawable="@drawable/ic_invert_colors_black_24dp"
-            app:counterEnabled="false">
+            app:counterEnabled="false"
+            app:startIconDrawable="@drawable/ic_invert_colors_black_24dp">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/blood"
@@ -222,8 +225,8 @@
             android:layout_height="wrap_content"
             android:hint="Genotype"
             android:padding="@dimen/spacing_small"
-            app:startIconDrawable="@drawable/ic_baseline_colorize_24"
-            app:counterEnabled="false">
+            app:counterEnabled="false"
+            app:startIconDrawable="@drawable/ic_baseline_colorize_24">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/genotype"
@@ -238,8 +241,8 @@
             android:layout_height="wrap_content"
             android:hint="Next Of Kin"
             android:padding="@dimen/spacing_small"
-            app:startIconDrawable="@drawable/ic_person_black_24dp"
-            app:counterEnabled="false">
+            app:counterEnabled="false"
+            app:startIconDrawable="@drawable/ic_person_black_24dp">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/nok"
@@ -254,8 +257,8 @@
             android:layout_height="wrap_content"
             android:hint="State Of Origin"
             android:padding="@dimen/spacing_small"
-            app:startIconDrawable="@drawable/ic_change_history_black_24dp"
-            app:counterEnabled="false">
+            app:counterEnabled="false"
+            app:startIconDrawable="@drawable/ic_change_history_black_24dp">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/state_of_origin"
@@ -271,8 +274,8 @@
             android:layout_height="wrap_content"
             android:hint="LGA"
             android:padding="@dimen/spacing_small"
-            app:startIconDrawable="@drawable/ic_track_changes_black_24dp"
-            app:counterEnabled="false">
+            app:counterEnabled="false"
+            app:startIconDrawable="@drawable/ic_track_changes_black_24dp">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/lga"
@@ -287,8 +290,8 @@
             android:layout_height="wrap_content"
             android:hint="Hometown"
             android:padding="@dimen/spacing_small"
-            app:startIconDrawable="@drawable/ic_change_history_black_24dp"
-            app:counterEnabled="false">
+            app:counterEnabled="false"
+            app:startIconDrawable="@drawable/ic_change_history_black_24dp">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/hometown"
@@ -304,8 +307,8 @@
             android:layout_height="wrap_content"
             android:hint="National ID Card Number"
             android:padding="@dimen/spacing_small"
-            app:startIconDrawable="@drawable/ic_card_membership_black_24dp"
-            app:counterEnabled="false">
+            app:counterEnabled="false"
+            app:startIconDrawable="@drawable/ic_card_membership_black_24dp">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/nin"
@@ -321,8 +324,8 @@
             android:layout_height="wrap_content"
             android:hint="Secondary School (year in)"
             android:padding="@dimen/spacing_small"
-            app:startIconDrawable="@drawable/ic_perm_contact_calendar_black_24dp"
-            app:counterEnabled="false">
+            app:counterEnabled="false"
+            app:startIconDrawable="@drawable/ic_perm_contact_calendar_black_24dp">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/school_in"
@@ -337,9 +340,9 @@
             android:layout_height="wrap_content"
             android:hint="Secondary School (year out)"
             android:padding="@dimen/spacing_small"
-            app:startIconDrawable="@drawable/ic_perm_contact_calendar_black_24dp"
+            app:counterEnabled="false"
 
-            app:counterEnabled="false">
+            app:startIconDrawable="@drawable/ic_perm_contact_calendar_black_24dp">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/school_out"
@@ -348,7 +351,11 @@
 
                 android:inputType="number" />
         </com.google.android.material.textfield.TextInputLayout>
-
+        <ProgressBar
+            android:id="@+id/progress"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone" />
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/home"
             android:layout_width="150dp"

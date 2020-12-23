@@ -22,13 +22,12 @@ public class Dashboard extends AppCompatActivity {
         setContentView(R.layout.activity_main);
     }
 
+    public void verify(View view) {
+        startActivity(new Intent(this, Login.class).putExtra("extra", "verify"));
+    }
 
     public void enroll(View view) {
         startActivity(new Intent(this, BioData.class).putExtra("extra", "enroll"));
-    }
-
-    public void verify(View view) {
-        startActivity(new Intent(this, Login.class).putExtra("extra", "verify"));
     }
 
     public void dashboard(View view) {
