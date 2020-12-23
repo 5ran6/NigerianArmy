@@ -24,7 +24,7 @@ public class Dashboard extends AppCompatActivity {
 
 
     public void enroll(View view) {
-        startActivity(new Intent(this, Enroll.class).putExtra("extra", "enroll"));
+        startActivity(new Intent(this, BioData.class).putExtra("extra", "enroll"));
     }
 
     public void verify(View view) {
