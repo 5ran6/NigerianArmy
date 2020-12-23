@@ -30,7 +30,7 @@
     <androidx.appcompat.widget.AppCompatCheckedTextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Powered By NIMC"
+        android:text="Powered By NAIC"
         android:textAlignment="center"
 android:textStyle="italic"
 

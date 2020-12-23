@@ -66,18 +66,17 @@ dependencies {
     implementation 'com.google.android:flexbox:0.3.2'
     // google flexible box
     //api
-    implementation 'com.google.code.gson:gson:2.8.5'
+    implementation 'com.google.code.gson:gson:2.8.6'
     implementation 'com.squareup.retrofit2:retrofit:2.7.1'
     implementation 'com.theartofdev.edmodo:android-image-cropper:2.6.0'
-    implementation 'com.squareup.retrofit2:converter-gson:2.1.0'
+    implementation 'com.squareup.retrofit2:converter-gson:2.6.2'
     // https://mvnrepository.com/artifact/commons-io/commons-io
     implementation 'commons-io:commons-io:2.6'
     // https://mvnrepository.com/artifact/com.googlecode.json-simple/json-simple
     implementation 'com.googlecode.json-simple:json-simple:1.1.1'
     implementation 'org.apache.commons:commons-text:1.6'
     implementation 'com.ogaclejapan.smarttablayout:library:2.0.0@aar'
-    implementation 'com.google.firebase:firebase-iid:20.2.4'
-    implementation 'com.google.firebase:firebase-analytics:17.5.0'
+
     implementation 'com.google.android.material:material:1.2.1'
     implementation files('libs/multiscan.jar')
     implementation files('libs/telpo_api.jar')

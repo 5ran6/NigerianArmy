@@ -193,7 +193,7 @@ public class Login extends AppCompatActivity {
                                 try {
                                     jobj = (JSONObject) parse.parse(response.body().getData());
 
-                                 //   JSONObject jsonobj_1 = (JSONObject) jobj.get("data");
+                                    //   JSONObject jsonobj_1 = (JSONObject) jobj.get("data");
 
                                     String army_number = (String) jobj.get("army_number");
                                     String name = (String) jobj.get("name");

@@ -1,5 +1,6 @@
 package com.naic.nigerianarmy.models;
 
+
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
@@ -24,6 +25,9 @@ public class UserResponse {
     @SerializedName("message")
     @Expose
     private String message;
+    @SerializedName("token")
+    @Expose
+    private String token;
 
     public String getData() {
         return data;
@@ -66,5 +70,11 @@ public class UserResponse {
     }
 
 
+    public String getToken() {
+        return token;
+    }
 
+    public void setToken(String token) {
+        this.token = token;
+    }
 }
