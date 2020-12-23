@@ -21,10 +21,12 @@ import androidx.transition.Transition;
 import androidx.transition.TransitionValues;
 
 import com.google.gson.Gson;
-import com.naic.nigerianarmy.interfaces.BIPPIIS;
+import com.naic.nigerianarmy.interfaces.NAIC;
 import com.naic.nigerianarmy.models.LoginRequest;
+import com.naic.nigerianarmy.models.UserResponse;
 import com.naic.nigerianarmy.utils.LfsJavaWrapperDefinesMinutiaN;
 import com.naic.nigerianarmy.utils.Tools;
+import com.suprema.android.BioMiniJni;
 
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.SerializationUtils;
@@ -129,7 +131,7 @@ public class Login extends AppCompatActivity {
     }
 
     private void login() {
-        bippiis = bip.getText().toString().trim();
+        bippiis = Objects.requireNonNull(bip.getText()).toString().trim();
 
         if (bippiis.isEmpty()) {
             Toast.makeText(getApplicationContext(), "STAFF ID NUMBER CANNOT BE EMPTY!", Toast.LENGTH_SHORT).show();
@@ -152,109 +154,130 @@ public class Login extends AppCompatActivity {
             Retrofit retrofit = new Retrofit.Builder().client(client)
                     .baseUrl(getString(R.string.base_url))
                     .addConverterFactory(GsonConverterFactory.create()).build();
-            BIPPIIS service = retrofit.create(BIPPIIS.class);
+            NAIC service = retrofit.create(NAIC.class);
 
             LoginRequest loginRequest = new LoginRequest();
             loginRequest.setBippiis_number(Objects.requireNonNull(bip.getText()).toString().trim());
-          //  loginRequest.setFirebaseToken(mToken);
+            //  loginRequest.setFirebaseToken(mToken);
 
-            Call<ResponseBody> ResponseBodyCall = service.getLoginResponse(loginRequest);
-            ResponseBodyCall.enqueue(new Callback<ResponseBody>() {
+            Call<UserResponse> ResponseBodyCall = service.getLoginResponse(loginRequest);
+
+
+            ResponseBodyCall.enqueue(new Callback<UserResponse>() {
                 @Override
-                public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                public void onResponse(Call<UserResponse> call, Response<UserResponse> response) {
                     progressBar.setVisibility(View.GONE);
                     Log.d("fingerprint", "Response Code: " + response.code());
 //                    Log.d("fingerprint",   getBippiis + " edited STAFF ID: " + bippiis + " token : " + token + " firebase token : " + mToken);
-                    Log.d("fingerprint",   getBippiis + " edited STAFF ID: " + bippiis + " token : " + token);
+                    // Log.d("fingerprint",   getBippiis + " edited STAFF ID: " + bippiis + " token : " + token);
 
                     //validate response
                     try {
-                        if (response.code() == 201) {
-                            InputStream inputStr = response.body().byteStream();
+                        if (response.code() >= 200) {
+//                            InputStream inputStr = response.body() != null ? response.body().byteStream() : null;
+//
+//                            String jsonResponse = "";
+//
+//
+//                            try {
+//                                jsonResponse = IOUtils.toString(inputStr, "UTF-8");
+//                                Log.d("fingerprint", "" + jsonResponse);
+//                            } catch (IOException e) {
+//                                e.printStackTrace();
+//                            }
 
-                            String jsonResponse = "";
-                            boolean enrolled = false;
-
-                            try {
-                                jsonResponse = IOUtils.toString(inputStr, "UTF-8");
-                                Log.d("fingerprint", "" + jsonResponse);
-                            } catch (IOException e) {
-                                e.printStackTrace();
-                            }
-
-                            if (!jsonResponse.isEmpty()) {
+                            if (!response.body().getData().isEmpty()) {
 
                                 JSONParser parse = new JSONParser();
-                                JSONObject jobj = null;
+                                JSONObject jobj;
                                 try {
-                                    jobj = (JSONObject) parse.parse(jsonResponse);
+                                    jobj = (JSONObject) parse.parse(response.body().getData());
 
-                                    JSONObject jsonobj_1 = (JSONObject) jobj.get("data");
+                                 //   JSONObject jsonobj_1 = (JSONObject) jobj.get("data");
 
-                                    String fullname = (String) jsonobj_1.get("fullname");
+                                    String army_number = (String) jobj.get("army_number");
+                                    String name = (String) jobj.get("name");
+                                    String age = (String) jobj.get("age");
+                                    String height = (String) jobj.get("height");
+                                    String eye_color = (String) jobj.get("eye_color");
+                                    String hair_color = (String) jobj.get("hair_color");
+                                    String tattoo = (String) jobj.get("tattoo");
+                                    String sex = (String) jobj.get("sex");
+                                    String phone = (String) jobj.get("phone");
+                                    String weight = (String) jobj.get("weight");
+                                    String marital_status = (String) jobj.get("marital_status");
+                                    String blood_group = (String) jobj.get("blood_group");
+                                    String state_of_origin = (String) jobj.get("state_of_origin");
+                                    String lga = (String) jobj.get("lga");
+                                    String hometown = (String) jobj.get("hometown");
+                                    String nin = (String) jobj.get("nin");
+                                    String sec_sch_year_in = (String) jobj.get("sec_sch_year_in");
+                                    String sec_sch_year_out = (String) jobj.get("sec_sch_year_out");
+                                    String nok_name = (String) jobj.get("nok_name");
+                                    String nok_phone = (String) jobj.get("nok_phone");
 
-                                    enrolled = (Boolean) jsonobj_1.get("has_enrolled");
-                                    Log.d("fingerprint", "has enroll: " + enrolled);
-                                    bippiis = bippiis.replace("/", "_");
-                                    bippiis = bippiis.replace("-", "_");
-                                    bippiis = bippiis.replace(" ", "_").toUpperCase();
 
-                             //       if (extra.equalsIgnoreCase("enroll")) {
-                                    //TODO: will know if there is an enrolled flag from API Docs
+                                    // store fingerprint in arrayList
 
-                                        if (!enrolled) {
-                                            Log.d("fingerprint", "Coming from Original BIPPIIS : " + getBippiis + " edited STAFF ID: " + bippiis + " token : " + token );
-                                            startActivity(new Intent(getApplicationContext(), Enroll.class).putExtra("bippiis_number", getBippiis).putExtra("bippiis_number_edited", bippiis).putExtra("token", token).putExtra("fullname", fullname).putExtra("extra", extra));
-                                        } else {
-                                          //  Toast.makeText(getApplicationContext(), "Has been enrolled", Toast.LENGTH_LONG).show();
+                                    ArrayList<String> fingeprints = new ArrayList<String>();
+                                    org.json.simple.JSONArray biometrics = new org.json.simple.JSONArray();
+                                    biometrics = (org.json.simple.JSONArray) jobj.get("biometrics");
 
-                                            // store fingerprint in arrayList
-                                            ArrayList<String> fingeprints = new ArrayList<String>();
-                                            org.json.simple.JSONArray biometrics = new org.json.simple.JSONArray();
-                                            biometrics = (org.json.simple.JSONArray) jsonobj_1.get("biometrics");
+                                    assert biometrics != null;
+                                    int len = biometrics.size();
 
-                                            assert biometrics != null;
-                                            int len = biometrics.size();
+                                    for (int j = 0; j < len; j++) {
+                                        JSONObject json = (JSONObject) biometrics.get(j);
+                                        fingeprints.add((String) json.get("fingerprint"));
+                                        //    Log.d("myProbe", fingeprints.get(j));
+                                        byte[] bytes = Base64.decode(fingeprints.get(j), Base64.DEFAULT);
+                                        LfsJavaWrapperDefinesMinutiaN[] Probe = deSerialize(bytes);
+                                        File file = new File(GetBippiisDirectoryName(),
+                                                "temp_" + j + ".json");
+                                        try {
+                                            // Serialize Java object into JSON file.
+                                            Gson gson = new Gson();
+                                            String json1 = gson.toJson(Probe);
 
-                                            for (int j = 0; j < len; j++) {
-                                                JSONObject json = (JSONObject) biometrics.get(j);
-                                                fingeprints.add((String) json.get("fingerprint"));
-                                                //    Log.d("myProbe", fingeprints.get(j));
-                                                byte[] bytes = Base64.decode(fingeprints.get(j), Base64.DEFAULT);
-                                                LfsJavaWrapperDefinesMinutiaN[] Probe = deSerialize(bytes);
-                                                File file = new File(GetBippiisDirectoryName(),
-                                                        "temp_" + j + ".json");
-                                                try {
-                                                    // Serialize Java object into JSON file.
-                                                    Gson gson = new Gson();
-                                                    String json1 = gson.toJson(Probe);
+                                            //           mapper.writeValue(file, json);
+                                            FileWriter fw = new FileWriter(file.getAbsolutePath());
+                                            fw.write(json1);
+                                            fw.close();
 
-                                                    //           mapper.writeValue(file, json);
-                                                    FileWriter fw = new FileWriter(file.getAbsolutePath());
-                                                    fw.write(json1);
-                                                    fw.close();
-
-                                                } catch (IOException e) {
-                                                    e.printStackTrace();
-                                                }
-
-                                                Log.d("Fingerprint", "Closed " + j + " successfully");
-
-                                            }
-                                            if (extra.equalsIgnoreCase("enroll"))
-                                                startActivity(new Intent(getApplicationContext(), Enroll.class).putExtra("bippiis_number", getBippiis).putExtra("bippiis_number_edited", bippiis).putExtra("token", token).putExtra("fullname", fullname).putExtra("extra", extra));
-                                            if (extra.equalsIgnoreCase("verify"))
-                                                startActivity(new Intent(getApplicationContext(), Verify.class).putExtra("bippiis_number", getBippiis).putExtra("bippiis_number_edited", bippiis).putExtra("token", token).putExtra("fullname", fullname).putExtra("extra", extra));
-
+                                        } catch (IOException e) {
+                                            e.printStackTrace();
                                         }
-                      //              }
 
+                                        Log.d("Fingerprint", "Closed " + j + " successfully");
 
-//                                    if (extra.equalsIgnoreCase("verify"))
-//                                        startActivity(new Intent(getApplicationContext(), Verify.class).putExtra("bippiis_number", getBippiis).putExtra("bippiis_number_edited", bippiis).putExtra("token", token).putExtra("fullname", fullname));
-//                                    if (extra.equalsIgnoreCase("profile"))
-//                                        startActivity(new Intent(getApplicationContext(), Profile.class).putExtra("bippiis_number", getBippiis).putExtra("bippiis_number_edited", bippiis).putExtra("token", token).putExtra("fullname", fullname));
+                                    }
+                                    if (extra.equalsIgnoreCase("profile"))
+                                        startActivity(new Intent(getApplicationContext(), BioData.class)
+                                                .putExtra("extra", extra)
+                                                .putExtra("army_number", army_number)
+                                                .putExtra("name", name)
+                                                .putExtra("age", age)
+                                                .putExtra("height", height)
+                                                .putExtra("eye_color", eye_color)
+                                                .putExtra("hair_color", hair_color)
+                                                .putExtra("tattoo", tattoo)
+                                                .putExtra("sex", sex)
+                                                .putExtra("phone", phone)
+                                                .putExtra("weight", weight)
+                                                .putExtra("marital_status", marital_status)
+                                                .putExtra("blood_group", blood_group)
+                                                .putExtra("state_of_origin", state_of_origin)
+                                                .putExtra("lga", lga)
+                                                .putExtra("hometown", hometown)
+                                                .putExtra("nin", nin)
+                                                .putExtra("sec_sch_year_in", sec_sch_year_in)
+                                                .putExtra("sec_sch_year_out", sec_sch_year_out)
+                                                .putExtra("nok_name", nok_name)
+                                                .putExtra("nok_phone", nok_phone)
 
+                                        ); //put all string extras
+                                    if (extra.equalsIgnoreCase("verify"))
+                                        startActivity(new Intent(getApplicationContext(), Enroll.class).putExtra("fullname", name).putExtra("extra", extra));
                                 } catch (ParseException | NullPointerException e) {
                                     e.printStackTrace();
                                 }
@@ -278,7 +301,7 @@ public class Login extends AppCompatActivity {
                 }
 
                 @Override
-                public void onFailure(Call<ResponseBody> call, Throwable t) {
+                public void onFailure(Call<UserResponse> call, Throwable t) {
                     progressBar.setVisibility(View.GONE);
                     Toast.makeText(getApplicationContext(), "Network Error", Toast.LENGTH_SHORT).show();
 
@@ -296,7 +319,7 @@ public class Login extends AppCompatActivity {
             Tools.toast("Press again to go back", Login.this);
             exitTime = System.currentTimeMillis();
         } else {
-           finish();
+            finish();
         }
     }
 

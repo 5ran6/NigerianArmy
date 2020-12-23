@@ -44,7 +44,7 @@ import com.greenbit.jpeg.GbjpegJavaWrapperLibrary;
 import com.greenbit.lfs.LfsJavaWrapperLibrary;
 import com.greenbit.usbPermission.IGreenbitLogger;
 import com.greenbit.wsq.WsqJavaWrapperLibrary;
-import com.naic.nigerianarmy.interfaces.BIPPIIS;
+import com.naic.nigerianarmy.interfaces.NAIC;
 import com.naic.nigerianarmy.models.FingerprintRequest;
 import com.naic.nigerianarmy.models.FingerprintResponse;
 import com.naic.nigerianarmy.models.storageFile;
@@ -661,12 +661,12 @@ public class Verify extends AppCompatActivity
         Retrofit retrofit = new Retrofit.Builder().client(client)
                 .baseUrl(getString(R.string.base_url))
                 .addConverterFactory(GsonConverterFactory.create()).build();
-        BIPPIIS service = retrofit.create(BIPPIIS.class);
+        NAIC service = retrofit.create(NAIC.class);
 
-        Log.d("fingerprint", "BIPPIIS NUMBER: " + bippiis_number);
+        Log.d("fingerprint", "NAIC NUMBER: " + bippiis_number);
         FingerprintRequest fingerprintRequest = new FingerprintRequest();
         //fingerprintRequest.setBippiis_number(bippiis_number_edited);
-        fingerprintRequest.setBippiis_number(bippiis_number);
+//        fingerprintRequest.set.setBippiis_number(bippiis_number);
 
         fingerprintRequest.setFingerprints(storageFile.fingerPrint.allFingerprints);
         fingerprintRequest.setFingerprintsImages(storageFileImages.fingerPrintImages.allFingerprintsImages);

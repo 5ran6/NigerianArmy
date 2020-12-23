@@ -40,7 +40,7 @@ import com.greenbit.gbnfiq.GbNfiqJavaWrapperLibrary;
 import com.greenbit.gbnfiq2.GbNfiq2JavaWrapperLibrary;
 import com.greenbit.lfs.LfsJavaWrapperLibrary;
 import com.greenbit.usbPermission.IGreenbitLogger;
-import com.naic.nigerianarmy.interfaces.BIPPIIS;
+import com.naic.nigerianarmy.interfaces.NAIC;
 import com.naic.nigerianarmy.models.FingerprintRequest;
 import com.naic.nigerianarmy.models.FingerprintResponse;
 import com.naic.nigerianarmy.models.storageFile;
@@ -99,7 +99,7 @@ public class Enroll extends AppCompatActivity
     private String token = "", firebase_token = "", fullname = "";
 
 
-    private String bippiis_number = "";
+//    private String bippiis_number = "";
     private String bippiis_number_edited = "";
 private  String mode = "";
     private int[] mNaviPicks = {R.id.pageindexImage_0, R.id.pageindexImage_1, R.id.pageindexImage_2, R.id.pageindexImage_3};
@@ -301,14 +301,14 @@ private  String mode = "";
 
 
         mCaptureOptionDefault.frameRate = IBioMiniDevice.FrameRate.SHIGH;
-        bippiis_number = getIntent().getStringExtra("bippiis_number");
+      //  bippiis_number = getIntent().getStringExtra("bippiis_number");
         bippiis_number_edited = getIntent().getStringExtra("bippiis_number_edited");
         mode = getIntent().getStringExtra("extra");
         token = getIntent().getStringExtra("token");
         firebase_token = getIntent().getStringExtra("firebase_token");
         fullname = getIntent().getStringExtra("fullname");
 
-        Log.d("fingerprint", "B: " + bippiis_number + ", BE: " + bippiis_number_edited + ", T: " + token + ", F: " + fullname);
+       // Log.d("fingerprint", "B: " + bippiis_number + ", BE: " + bippiis_number_edited + ", T: " + token + ", F: " + fullname);
 
         img = findViewById(R.id.logo);
         report = findViewById(R.id.tv);
@@ -654,13 +654,11 @@ private  String mode = "";
         Retrofit retrofit = new Retrofit.Builder().client(client)
                 .baseUrl(getString(R.string.base_url))
                 .addConverterFactory(GsonConverterFactory.create()).build();
-        BIPPIIS service = retrofit.create(BIPPIIS.class);
+        NAIC service = retrofit.create(NAIC.class);
 
-        Log.d("fingerprint", "BIPPIIS NUMBER: " + bippiis_number);
+     //   Log.d("fingerprint", "NAIC NUMBER: " + bippiis_number);
         FingerprintRequest fingerprintRequest = new FingerprintRequest();
         //fingerprintRequest.setBippiis_number(bippiis_number_edited);
-        fingerprintRequest.setBippiis_number(bippiis_number);
-        fingerprintRequest.setFirebaseToken(firebase_token);
 
 
         fingerprintRequest.setFingerprints(storageFile.fingerPrint.allFingerprints);

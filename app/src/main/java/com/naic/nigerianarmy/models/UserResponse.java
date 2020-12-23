@@ -3,11 +3,11 @@ package com.naic.nigerianarmy.models;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class FingerprintResponse {
+public class UserResponse {
 
     @SerializedName("data")
     @Expose
-    private Object data;
+    private String data;
 
     @SerializedName("status")
     @Expose
@@ -17,21 +17,20 @@ public class FingerprintResponse {
     @Expose
     private String status_code;
 
+    @SerializedName("code")
+    @Expose
+    private String code;
+
     @SerializedName("message")
     @Expose
     private String message;
 
-
-    @SerializedName("token")
-    @Expose
-    private String token;
-
-    public String getToken() {
-        return token;
+    public String getData() {
+        return data;
     }
 
-    public void setToken(String token) {
-        this.token = token;
+    public void setData(String data) {
+        this.data = data;
     }
 
     public String getStatus() {
@@ -50,15 +49,13 @@ public class FingerprintResponse {
         this.status_code = status_code;
     }
 
-    public Object getData() {
-
-        return data;
+    public String getCode() {
+        return code;
     }
 
-    public void setData(Object data) {
-        this.data = data;
+    public void setCode(String code) {
+        this.code = code;
     }
-
 
     public String getMessage() {
         return message;
@@ -67,4 +64,7 @@ public class FingerprintResponse {
     public void setMessage(String message) {
         this.message = message;
     }
+
+
+
 }

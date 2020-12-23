@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 
 import com.google.android.material.textfield.TextInputEditText;
@@ -12,6 +13,7 @@ import com.google.android.material.textfield.TextInputEditText;
 public class BioData extends AppCompatActivity {
 
     ProgressBar progressBar;
+    ImageView passport;
     TextInputEditText fullname, age, phone, height, weight, eye_color,
             hair_color, tatoo, gender, marital_status, blood_group,
             genotype, nok, state_origin, lga, hometown, nin, school_in, school_out;
@@ -26,6 +28,7 @@ public class BioData extends AppCompatActivity {
     }
 
     private void initializer() {
+        passport = findViewById(R.id.passport);
         progressBar = findViewById(R.id.progress);
         fullname = findViewById(R.id.fullname);
         age = findViewById(R.id.age);

@@ -16,7 +16,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatButton;
 
-import com.naic.nigerianarmy.interfaces.BIPPIIS;
+import com.naic.nigerianarmy.interfaces.NAIC;
 import com.naic.nigerianarmy.models.PassportRequest;
 import com.naic.nigerianarmy.models.PassportResponse;
 import com.naic.nigerianarmy.models.storageFile;
@@ -144,7 +144,7 @@ public class CameraCapture extends AppCompatActivity {
         Retrofit retrofit = new Retrofit.Builder().client(client)
                 .baseUrl(getString(R.string.base_url))
                 .addConverterFactory(GsonConverterFactory.create()).build();
-        BIPPIIS service = retrofit.create(BIPPIIS.class);
+        NAIC service = retrofit.create(NAIC.class);
 
         PassportRequest passportRequest = new PassportRequest();
         passportRequest.setPassport("data:image/jpeg;base64," + imageString);
