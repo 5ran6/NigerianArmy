@@ -686,8 +686,9 @@ private  String mode = "";
 
 
                     //TODO: remove later
-                    Log.d("fingerprint", "fingerPrintResponse RESPONSE Error Body: " + response.errorBody().toString());
-                    Log.d("fingerprint", "fingerPrintResponse RESPONSE Error Body: " + response.errorBody().source().readUtf8());
+//                    Log.d("fingerprint", "fingerPrintResponse RESPONSE Error Body: " + response.errorBody().toString());
+//                    Log.d("fingerprint", "fingerPrintResponse RESPONSE Error Body: " + response.errorBody().source().readUtf8());
+                    //Army-40DCG
                 } catch (Exception e) {
                     e.printStackTrace();
                 }

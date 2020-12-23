@@ -12,6 +12,7 @@ import com.naic.nigerianarmy.models.UserResponse;
 
 import okhttp3.ResponseBody;
 import retrofit2.Call;
+import retrofit2.Response;
 import retrofit2.http.Body;
 import retrofit2.http.POST;
 
@@ -29,7 +30,7 @@ public interface NAIC {
     Call<FingerprintResponse> getFingerprintResponse(@Body FingerprintRequest fingerprintRequest);
 
     @POST("uploadPassport")
-    Call<PassportResponse> getPassportResponse(@Body PassportRequest passportRequest);
+    Call<ResponseBody> getPassportResponse(@Body PassportRequest passportRequest);
 
     @POST("verifyUser")
     Call<UserResponse> getLoginResponse(@Body LoginRequest loginRequest);

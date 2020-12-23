@@ -20,6 +20,9 @@ public class FingerprintResponse {
     @SerializedName("message")
     @Expose
     private String message;
+    @SerializedName("profile")
+    @Expose
+    private String profile;
 
 
     @SerializedName("token")
@@ -66,5 +69,13 @@ public class FingerprintResponse {
 
     public void setMessage(String message) {
         this.message = message;
+    }
+
+    public String getProfile() {
+        return profile;
+    }
+
+    public void setProfile(String profile) {
+        this.profile = profile;
     }
 }

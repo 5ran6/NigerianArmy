@@ -25,9 +25,11 @@ import com.theartofdev.edmodo.cropper.CropImage;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
+
 import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
+import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -38,6 +40,7 @@ public class CameraCapture extends AppCompatActivity {
     ImageView imageViewCompat;
     AppCompatButton home;
     String token = "";
+    String army_number = "";
     ProgressBar progressBar;
     //captured picture uri
     private Uri mImageUri;
@@ -54,6 +57,7 @@ public class CameraCapture extends AppCompatActivity {
         home = findViewById(R.id.home);
         progressBar = findViewById(R.id.progress);
         token = getIntent().getStringExtra("token");
+        army_number = getIntent().getStringExtra("army_number");
         Log.d("fingerprint", "Token: " + token);
 
     }
@@ -101,6 +105,8 @@ public class CameraCapture extends AppCompatActivity {
 
     public void home(View view) {
         if (success) {
+
+
             //delete directory
 //            File dir = new File(Environment.getExternalStorageDirectory()+"Dir_name_here");
             File dir = new File(GetGreenbitDirectoryName());
@@ -111,7 +117,7 @@ public class CameraCapture extends AppCompatActivity {
                 }
                 Log.d("fingerprint", "Deleted Greenbit folder successfully");
             }
-            startActivity(new Intent(getApplicationContext(), BioData.class));
+            startActivity(new Intent(getApplicationContext(), BioData.class).putExtra("extra", "enroll"));
         } else
             uploadImage();
     }
@@ -149,39 +155,43 @@ public class CameraCapture extends AppCompatActivity {
         PassportRequest passportRequest = new PassportRequest();
         passportRequest.setPassport("data:image/jpeg;base64," + imageString);
 
-        Call<PassportResponse> passportResponseCall = service.getPassportResponse(passportRequest);
-        passportResponseCall.enqueue(new Callback<PassportResponse>() {
+        Call<ResponseBody> passportResponseCall = service.getPassportResponse(passportRequest);
+        passportResponseCall.enqueue(new Callback<ResponseBody>() {
             @Override
-            public void onResponse(Call<PassportResponse> call, Response<PassportResponse> response) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
 
                 // TODO: still need to catch errors properly from accurate response filters
 
+                if (response.code() == 200 || response.code() == 201) {
+                    Log.d("fingerprint", "Uploaded successfully message " + response.message());
+                    Log.d("fingerprint", "Uploaded successfully body " + response.body());
+                    Log.d("fingerprint", "Uploaded successfully toString " + response.toString());
+                    Log.d("fingerprint", "Uploaded successfully raw " + response.raw());
+                    Log.d("fingerprint", "Uploaded successfully BASE64 IMG:  " + imageString);
 
-                Log.d("fingerprint", "Uploaded successfully message " + response.message());
-                Log.d("fingerprint", "Uploaded successfully body " + response.body());
-                Log.d("fingerprint", "Uploaded successfully toString " + response.toString());
-                Log.d("fingerprint", "Uploaded successfully raw " + response.raw());
-                Log.d("fingerprint", "Uploaded successfully BASE64 IMG:  " + imageString);
+                    progressBar.setVisibility(View.GONE);
+                    home.setBackgroundColor(getResources().getColor(R.color.green_400));
+                    home.setEnabled(true);
+                    success = true;
+                    home.setText("Done");
+                    Log.d("fingerprint", "Uploaded successfully " + response);
+                    home.performClick(); //to take you to next activity
+                    //validate response
 
+                } else {
+                    Toast.makeText(getApplicationContext(), "Something went wrong. Try again!", Toast.LENGTH_SHORT).show();
+                }
 
-                progressBar.setVisibility(View.GONE);
-                home.setBackgroundColor(getResources().getColor(R.color.green_400));
-                home.setEnabled(true);
-                success = true;
-                home.setText("Done");
-                Log.d("fingerprint", "Uploaded successfully " + response);
-                home.performClick(); //to take you to next activity
-                //validate response
             }
 
             @Override
-            public void onFailure(Call<PassportResponse> call, Throwable t) {
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
                 progressBar.setVisibility(View.GONE);
                 success = false;
                 home.setEnabled(true);
                 home.setText("Retry");
                 home.setBackgroundColor(getResources().getColor(R.color.colorAccent));
-                Log.d("fingerprint", "Failed to Upload");
+                Log.d("fingerprint", "Failed to Upload: " + t.toString());
             }
         });
 

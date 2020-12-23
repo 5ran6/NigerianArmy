@@ -75,6 +75,7 @@ public class BioData extends AppCompatActivity {
         school_out = findViewById(R.id.school_out);
         extra = getIntent().getStringExtra("extra");
 
+        assert extra != null;
         if (extra.equalsIgnoreCase("profile")) {
             //getIntents and set to views
             fullname.setText(getIntent().getStringExtra("name"));
