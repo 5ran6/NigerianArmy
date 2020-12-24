@@ -37,7 +37,7 @@ public class BioData extends AppCompatActivity {
 
     ProgressBar progressBar;
     ImageView passport;
-    TextInputEditText fullname, age, phone, height, weight, eye_color,
+    TextInputEditText fullname,email, age, phone, height, weight, eye_color,
             hair_color, tatoo, gender, marital_status, blood_group,
             genotype, nok, nok_phone, state_origin, lga, hometown, nin, school_in, school_out;
     String extra = "";
@@ -54,6 +54,7 @@ public class BioData extends AppCompatActivity {
         passport = findViewById(R.id.passport);
         progressBar = findViewById(R.id.progress);
         fullname = findViewById(R.id.fullname);
+        email = findViewById(R.id.email);
         age = findViewById(R.id.age);
         phone = findViewById(R.id.phone);
         height = findViewById(R.id.height);
@@ -86,6 +87,9 @@ public class BioData extends AppCompatActivity {
 
             height.setText(getIntent().getStringExtra("height"));
             height.setEnabled(false);
+
+            email.setText(getIntent().getStringExtra("email"));
+            email.setEnabled(false);
 
             eye_color.setText(getIntent().getStringExtra("eye_color"));
             eye_color.setEnabled(false);
@@ -177,7 +181,8 @@ public class BioData extends AppCompatActivity {
         UserRegisterRequest userRequest = new UserRegisterRequest();
         userRequest.setName(fullname.getText().toString());
         userRequest.setAge(age.getText().toString());
-        userRequest.setAge(phone.getText().toString());
+        userRequest.setPhone(phone.getText().toString());
+        userRequest.setEmail(email.getText().toString());
         userRequest.setHeight(height.getText().toString());
         userRequest.setWeight(weight.getText().toString());
         userRequest.setEye_color(eye_color.getText().toString());

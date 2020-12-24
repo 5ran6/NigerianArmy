@@ -45,6 +45,10 @@ public class UserRegisterRequest {
     @Expose
     private String marital_status;
 
+    @SerializedName("email")
+    @Expose
+    private String email;
+
     @SerializedName("blood_group")
     @Expose
     private String blood_group;
@@ -248,5 +252,13 @@ public class UserRegisterRequest {
 
     public void setGenotype(String genotype) {
         this.genotype = genotype;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 }
