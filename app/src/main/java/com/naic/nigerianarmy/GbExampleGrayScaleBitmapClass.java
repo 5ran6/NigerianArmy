@@ -944,7 +944,7 @@ public class GbExampleGrayScaleBitmapClass {
                 //load file
                 Log.d("fingerprint", "Current File: " + fname);
                 //                act.LogOnScreen("Storage dir: " + GetGreenbitDirectoryName());
-                File f = new File(GetGreenbitDirectoryName(),
+                File f = new File(GetBippiisDirectoryName() ,
                         fname);
 
                 Gson gson = new Gson();
