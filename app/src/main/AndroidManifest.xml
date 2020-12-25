@@ -16,15 +16,21 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar">
         <activity android:name=".SuccessActivity"></activity>
-        <activity android:name=".BioData" />
-        <activity android:name=".Splash">
+        <activity
+            android:name=".BioData"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Splash"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Enroll">
+        <activity
+            android:name=".Enroll"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <action android:name="android.hardware.usb.action.USB_DEVICE_ATTACHED" />
@@ -33,9 +39,15 @@
             </intent-filter>
         </activity>
         <activity android:name=".Dashboard" />
-        <activity android:name=".CameraCapture" />
-        <activity android:name=".Verify" />
-        <activity android:name=".Login" />
+        <activity
+            android:name=".CameraCapture"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Verify"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Login"
+            android:screenOrientation="portrait" />
         <activity
             android:name="com.theartofdev.edmodo.cropper.CropImageActivity"
             android:theme="@style/AppTheme" />
