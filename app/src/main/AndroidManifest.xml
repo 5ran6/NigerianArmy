@@ -38,7 +38,7 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-        <activity android:name=".Dashboard" />
+        <activity android:name=".Dashboard"  android:screenOrientation="portrait" />
         <activity
             android:name=".CameraCapture"
             android:screenOrientation="portrait" />
