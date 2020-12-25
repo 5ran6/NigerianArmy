@@ -96,7 +96,7 @@ public class Enroll extends AppCompatActivity
     private GifImageView img;
     private TextView report, name;
     private ViewPager mPager;
-    private String token = "", firebase_token = "", fullname = "";
+    private String token = "", army_number = "", fullname = "";
 
 
 //    private String bippiis_number = "";
@@ -305,7 +305,7 @@ private  String mode = "";
         bippiis_number_edited = getIntent().getStringExtra("bippiis_number_edited");
         mode = getIntent().getStringExtra("extra");
         token = getIntent().getStringExtra("token");
-        firebase_token = getIntent().getStringExtra("firebase_token");
+        army_number = getIntent().getStringExtra("army_number");
         fullname = getIntent().getStringExtra("fullname");
 
        // Log.d("fingerprint", "B: " + bippiis_number + ", BE: " + bippiis_number_edited + ", T: " + token + ", F: " + fullname);
@@ -706,7 +706,8 @@ private  String mode = "";
 
                         token = access_token;
                         uploaded = true;
-                        startActivity(new Intent(getApplicationContext(), CameraCapture.class).putExtra("token", token));
+                        finish();
+                        startActivity(new Intent(getApplicationContext(), CameraCapture.class).putExtra("token", token).putExtra("army_number", army_number));
                     } else {
                         // go to login then camera
                         img.setImageResource(R.drawable.unsuccessful);

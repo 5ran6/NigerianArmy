@@ -209,11 +209,12 @@ public class BioData extends AppCompatActivity {
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 progressBar.setVisibility(View.GONE);
                 Log.d("fingerprint", "Response Code: " + response.code());
-
-                InputStream inputStr = response.body().byteStream();
-
                 String jsonResponse = "";
+
                 try {
+                    InputStream inputStr = response.body().byteStream();
+
+
                     jsonResponse = IOUtils.toString(inputStr, "UTF-8");
                     Log.d("fingerprint", "" + jsonResponse);
                 } catch (IOException e) {
@@ -232,6 +233,7 @@ public class BioData extends AppCompatActivity {
                             String army_number = (String) jsonobj_1.get("army_number");
                             String token = (String) jobj.get("token");
 
+                            finish();
                             startActivity(new Intent(getApplicationContext(), Enroll.class)
                                     .putExtra("extra", extra)
                                     .putExtra("army_number", army_number)

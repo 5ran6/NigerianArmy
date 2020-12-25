@@ -117,6 +117,7 @@ public class CameraCapture extends AppCompatActivity {
                 }
                 Log.d("fingerprint", "Deleted Greenbit folder successfully");
             }
+            finish();
             startActivity(new Intent(getApplicationContext(), SuccessActivity.class).putExtra("extra", army_number));
         } else
             uploadImage();
@@ -154,6 +155,10 @@ public class CameraCapture extends AppCompatActivity {
 
         PassportRequest passportRequest = new PassportRequest();
         passportRequest.setPassport("data:image/jpeg;base64," + imageString);
+        passportRequest.setArmy_number(army_number);
+
+        Log.d("fingerprint", "ArmyNo  " + army_number);
+
 
         Call<ResponseBody> passportResponseCall = service.getPassportResponse(passportRequest);
         passportResponseCall.enqueue(new Callback<ResponseBody>() {
@@ -161,7 +166,7 @@ public class CameraCapture extends AppCompatActivity {
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
 
                 // TODO: still need to catch errors properly from accurate response filters
-
+                Log.d("fingerprint", response.code() + ": " + response.message() + ":: " + response.body());
                 if (response.code() == 200 || response.code() == 201) {
                     Log.d("fingerprint", "Uploaded successfully message " + response.message());
                     Log.d("fingerprint", "Uploaded successfully body " + response.body());
