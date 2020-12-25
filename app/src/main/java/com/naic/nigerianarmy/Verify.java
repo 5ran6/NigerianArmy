@@ -75,6 +75,7 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
+import static com.naic.nigerianarmy.GbExampleGrayScaleBitmapClass.GetBippiisDirectoryName;
 import static com.naic.nigerianarmy.GbExampleGrayScaleBitmapClass.GetGreenbitDirectoryName;
 
 
@@ -103,7 +104,6 @@ public class Verify extends AppCompatActivity
     private String token = "", fullname = "";
     private FloatingActionButton upload;
     private String bippiis_number = "";
-    private String bippiis_number_edited = "";
 
     private int[] mNaviPicks = {R.id.pageindexImage_0, R.id.pageindexImage_1, R.id.pageindexImage_2, R.id.pageindexImage_3};
 
@@ -170,8 +170,8 @@ public class Verify extends AppCompatActivity
                                 return;
                             }
                             try {
-                                File file = new File(GetGreenbitDirectoryName(),
-                                        bippiis_number_edited);
+                                File file = new File(GetBippiisDirectoryName(),
+                                        "temp");
                                 FileOutputStream fos = new FileOutputStream(file);
                                 fos.write(byteArray);
                                 fos.close();
@@ -312,11 +312,10 @@ public class Verify extends AppCompatActivity
 
         mCaptureOptionDefault.frameRate = IBioMiniDevice.FrameRate.SHIGH;
         bippiis_number = getIntent().getStringExtra("bippiis_number");
-        bippiis_number_edited = getIntent().getStringExtra("bippiis_number_edited");
         token = getIntent().getStringExtra("token");
         fullname = getIntent().getStringExtra("fullname");
 
-        Log.d("fingerprint", "B: " + bippiis_number + ", BE: " + bippiis_number_edited + ", T: " + token + ", F: " + fullname);
+//        Log.d("fingerprint", "B: " + bippiis_number + ", BE: " + bippiis_number_edited + ", T: " + token + ", F: " + fullname);
 
         img = findViewById(R.id.logo);
         report = findViewById(R.id.tv);
@@ -553,7 +552,7 @@ public class Verify extends AppCompatActivity
                 .Builder(Verify.this);
 
         // Set the message show for the Alert time
-        builder.setMessage("Going back without uploading?");
+        builder.setMessage("Are you done?");
 
         // Set Alert Title
         builder.setTitle("Alert !");

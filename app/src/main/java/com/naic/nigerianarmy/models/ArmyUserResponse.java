@@ -1,14 +1,17 @@
 package com.naic.nigerianarmy.models;
 
 
+import com.google.gson.JsonObject;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class UserResponse {
+import org.json.simple.JSONObject;
+
+public class ArmyUserResponse {
 
     @SerializedName("data")
     @Expose
-    private String data;
+    private JSONObject data;
 
     @SerializedName("status")
     @Expose
@@ -16,11 +19,7 @@ public class UserResponse {
 
     @SerializedName("status_code")
     @Expose
-    private String status_code;
-
-    @SerializedName("code")
-    @Expose
-    private String code;
+    private int status_code;
 
     @SerializedName("message")
     @Expose
@@ -29,11 +28,11 @@ public class UserResponse {
     @Expose
     private String token;
 
-    public String getData() {
+    public JSONObject getData() {
         return data;
     }
 
-    public void setData(String data) {
+    public void setData(JSONObject data) {
         this.data = data;
     }
 
@@ -45,21 +44,7 @@ public class UserResponse {
         this.status = status;
     }
 
-    public String getStatus_code() {
-        return status_code;
-    }
 
-    public void setStatus_code(String status_code) {
-        this.status_code = status_code;
-    }
-
-    public String getCode() {
-        return code;
-    }
-
-    public void setCode(String code) {
-        this.code = code;
-    }
 
     public String getMessage() {
         return message;
@@ -76,5 +61,13 @@ public class UserResponse {
 
     public void setToken(String token) {
         this.token = token;
+    }
+
+    public int getStatus_code() {
+        return status_code;
+    }
+
+    public void setStatus_code(int status_code) {
+        this.status_code = status_code;
     }
 }

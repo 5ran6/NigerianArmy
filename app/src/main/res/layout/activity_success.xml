@@ -21,7 +21,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:gravity="center"
-        android:padding="5dp"
+        android:padding="15dp"
         android:text="Your Registration was SUCCESSFUL"
         android:textAllCaps="true"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
@@ -36,6 +36,7 @@
         android:id="@+id/army_number"
         android:layout_width="match_parent"
 
+        android:padding="15dp"
         android:layout_height="wrap_content"
         android:gravity="center"
         android:textStyle="italic|bold" />
@@ -44,21 +45,22 @@
      android:onClick="copy"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@drawable/btn_rounded_green_300"
+        android:layout_margin="10dp"
+        android:background="@drawable/btn_rounded_grey"
         android:paddingLeft="@dimen/spacing_mlarge"
         android:paddingRight="@dimen/spacing_mlarge"
-        android:text="Click to Copy your ID Number"
-        android:textColor="@android:color/white" />
+        android:text="Copy your ID Number"
+        android:textColor="@android:color/black" />
 
     <androidx.appcompat.widget.AppCompatButton
       android:onClick="done"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@drawable/btn_rounded_grey"
+        android:background="@drawable/btn_rounded_green"
         android:paddingLeft="@dimen/spacing_mlarge"
         android:paddingRight="@dimen/spacing_mlarge"
         android:text="done"
-        android:textColor="@android:color/black" />
+        android:textColor="@android:color/white" />
 
     <ProgressBar
         android:id="@+id/progress"

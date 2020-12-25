@@ -900,7 +900,7 @@ public class GbExampleGrayScaleBitmapClass {
 //        return found;
 
 
-        File file = new File(GetGreenbitDirectoryName());
+        File file = new File(GetBippiisDirectoryName());
         String[] paths = file.list();
 
         /*******************

@@ -32,7 +32,7 @@
         android:layout_height="wrap_content"
         android:hint="Staff ID"
         android:imeOptions="actionDone"
-        android:inputType="textCapCharacters"
+        android:inputType="textCapWords"
 
         android:maxLength="25"
         android:maxLines="1"

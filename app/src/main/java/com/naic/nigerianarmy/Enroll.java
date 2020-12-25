@@ -31,6 +31,7 @@ import androidx.transition.Transition;
 import androidx.transition.TransitionValues;
 import androidx.viewpager.widget.ViewPager;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.greenbit.bozorth.BozorthJavaWrapperLibrary;
 import com.greenbit.gbfinimg.GbfinimgJavaWrapperLibrary;
 import com.greenbit.gbfrsw.GbfrswJavaWrapperDefinesImageFlags;
@@ -97,7 +98,7 @@ public class Enroll extends AppCompatActivity
     private TextView report, name;
     private ViewPager mPager;
     private String token = "", army_number = "", fullname = "";
-
+private FloatingActionButton uploadButton;
 
 //    private String bippiis_number = "";
     private String bippiis_number_edited = "";
@@ -309,6 +310,10 @@ private  String mode = "";
         fullname = getIntent().getStringExtra("fullname");
 
        // Log.d("fingerprint", "B: " + bippiis_number + ", BE: " + bippiis_number_edited + ", T: " + token + ", F: " + fullname);
+
+        uploadButton = findViewById(R.id.upload);
+        if (mode.equalsIgnoreCase("verify"))
+            uploadButton.setVisibility(View.GONE);
 
         img = findViewById(R.id.logo);
         report = findViewById(R.id.tv);
@@ -545,7 +550,10 @@ private  String mode = "";
                 .Builder(Enroll.this);
 
         // Set the message show for the Alert time
-        builder.setMessage("Going back without uploading?");
+        if (mode.equalsIgnoreCase("enroll"))
+            builder.setMessage("Going back without uploading?");
+        else
+            builder.setMessage("Going back without verifying?");
 
         // Set Alert Title
         builder.setTitle("Alert !");

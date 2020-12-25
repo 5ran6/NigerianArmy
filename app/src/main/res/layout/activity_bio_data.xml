@@ -107,7 +107,7 @@
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Height"
+            android:hint="Height (cm)"
             android:padding="@dimen/spacing_small"
 
             app:counterEnabled="true"
@@ -125,7 +125,7 @@
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Weight"
+            android:hint="Weight (kg)"
             android:padding="@dimen/spacing_small"
             app:counterEnabled="true"
             app:counterMaxLength="6"

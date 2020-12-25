@@ -13,7 +13,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.google.android.material.textfield.TextInputEditText;
 import com.naic.nigerianarmy.interfaces.NAIC;
 import com.naic.nigerianarmy.models.UserRegisterRequest;
-import com.naic.nigerianarmy.models.UserResponse;
 
 import org.apache.commons.io.IOUtils;
 import org.json.simple.JSONObject;
@@ -37,7 +36,7 @@ public class BioData extends AppCompatActivity {
 
     ProgressBar progressBar;
     ImageView passport;
-    TextInputEditText fullname,email, age, phone, height, weight, eye_color,
+    TextInputEditText fullname, email, age, phone, height, weight, eye_color,
             hair_color, tatoo, gender, marital_status, blood_group,
             genotype, nok, nok_phone, state_origin, lga, hometown, nin, school_in, school_out;
     String extra = "";
@@ -79,7 +78,7 @@ public class BioData extends AppCompatActivity {
         assert extra != null;
         if (extra.equalsIgnoreCase("profile")) {
             //getIntents and set to views
-            fullname.setText(getIntent().getStringExtra("name"));
+            fullname.setText(getIntent().getStringExtra("fullname"));
             fullname.setEnabled(false);
 
             age.setText(getIntent().getStringExtra("age"));
@@ -87,6 +86,9 @@ public class BioData extends AppCompatActivity {
 
             height.setText(getIntent().getStringExtra("height"));
             height.setEnabled(false);
+
+            weight.setText(getIntent().getStringExtra("weight"));
+            weight.setEnabled(false);
 
             email.setText(getIntent().getStringExtra("email"));
             email.setEnabled(false);
@@ -99,6 +101,9 @@ public class BioData extends AppCompatActivity {
 
             tatoo.setText(getIntent().getStringExtra("tattoo"));
             tatoo.setEnabled(false);
+
+            genotype.setText(getIntent().getStringExtra("genotype"));
+            genotype.setEnabled(false);
 
             gender.setText(getIntent().getStringExtra("sex"));
             gender.setEnabled(false);

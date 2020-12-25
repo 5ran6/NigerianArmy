@@ -27,7 +27,7 @@ public class SuccessActivity extends AppCompatActivity {
         setContentView(R.layout.activity_success);
         TextView armyNumber = findViewById(R.id.army_number);
         army_number = getIntent().getStringExtra("extra");
-        armyNumber.setText(army_number);
+        armyNumber.setText("Your registration Number is " +army_number);
 
     }
 

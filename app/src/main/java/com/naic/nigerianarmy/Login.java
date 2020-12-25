@@ -23,13 +23,12 @@ import androidx.transition.TransitionValues;
 import com.google.gson.Gson;
 import com.naic.nigerianarmy.interfaces.NAIC;
 import com.naic.nigerianarmy.models.LoginRequest;
-import com.naic.nigerianarmy.models.UserResponse;
+import com.naic.nigerianarmy.models.ArmyUserResponse;
 import com.naic.nigerianarmy.utils.LfsJavaWrapperDefinesMinutiaN;
 import com.naic.nigerianarmy.utils.Tools;
-import com.suprema.android.BioMiniJni;
 
-import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.SerializationUtils;
+import org.json.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
@@ -37,14 +36,12 @@ import org.json.simple.parser.ParseException;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Objects;
 
 import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
-import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -67,7 +64,7 @@ public class Login extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login_with_number);
 
-        extra = "verify";
+        extra = getIntent().getStringExtra("extra");
         bip = findViewById(R.id.bippiis_no);
         mode = getIntent().getStringExtra("extra");
 
@@ -160,12 +157,12 @@ public class Login extends AppCompatActivity {
             loginRequest.setBippiis_number(Objects.requireNonNull(bip.getText()).toString().trim());
             //  loginRequest.setFirebaseToken(mToken);
 
-            Call<UserResponse> ResponseBodyCall = service.getLoginResponse(loginRequest);
+            Call<ArmyUserResponse> ResponseBodyCall = service.getLoginResponse(loginRequest);
 
 
-            ResponseBodyCall.enqueue(new Callback<UserResponse>() {
+            ResponseBodyCall.enqueue(new Callback<ArmyUserResponse>() {
                 @Override
-                public void onResponse(Call<UserResponse> call, Response<UserResponse> response) {
+                public void onResponse(Call<ArmyUserResponse> call, Response<ArmyUserResponse> response) {
                     progressBar.setVisibility(View.GONE);
                     Log.d("fingerprint", "Response Code: " + response.code());
 //                    Log.d("fingerprint",   getBippiis + " edited STAFF ID: " + bippiis + " token : " + token + " firebase token : " + mToken);
@@ -186,49 +183,56 @@ public class Login extends AppCompatActivity {
 //                                e.printStackTrace();
 //                            }
 
-                            if (!response.body().getData().isEmpty()) {
+                            if (!response.body().getData().toString().isEmpty()) {
 
                                 JSONParser parse = new JSONParser();
-                                JSONObject jobj;
+                                JSONObject jsonobj_1;
                                 try {
-                                    jobj = (JSONObject) parse.parse(response.body().getData());
+                                    jsonobj_1 = (JSONObject) response.body().getData();
 
-                                    //   JSONObject jsonobj_1 = (JSONObject) jobj.get("data");
+                                    Log.d("fingerprint", jsonobj_1.toString());
 
-                                    String army_number = (String) jobj.get("army_number");
-                                    String name = (String) jobj.get("name");
-                                    String age = (String) jobj.get("age");
-                                    String height = (String) jobj.get("height");
-                                    String eye_color = (String) jobj.get("eye_color");
-                                    String hair_color = (String) jobj.get("hair_color");
-                                    String tattoo = (String) jobj.get("tattoo");
-                                    String sex = (String) jobj.get("sex");
-                                    String phone = (String) jobj.get("phone");
-                                    String weight = (String) jobj.get("weight");
-                                    String marital_status = (String) jobj.get("marital_status");
-                                    String blood_group = (String) jobj.get("blood_group");
-                                    String state_of_origin = (String) jobj.get("state_of_origin");
-                                    String lga = (String) jobj.get("lga");
-                                    String hometown = (String) jobj.get("hometown");
-                                    String nin = (String) jobj.get("nin");
-                                    String sec_sch_year_in = (String) jobj.get("sec_sch_year_in");
-                                    String sec_sch_year_out = (String) jobj.get("sec_sch_year_out");
-                                    String nok_name = (String) jobj.get("nok_name");
-                                    String nok_phone = (String) jobj.get("nok_phone");
+                                    org.json.JSONObject jsonObject = new org.json.JSONObject(jsonobj_1);
 
+//                                    JSONObject jobj = (JSONObject) jsonobj_1.get("profile");
+                                    org.json.JSONObject jobj =  jsonObject.getJSONObject("profile");
 
+                                    String army_number = (String) jobj.getString("army_number");
+                                    String name = (String) jobj.getString("name");
+                                    String age = (String) jobj.getString("age");
+                                 //   String email = (String) jobj.getString("email");
+                                    String email = name+"@gmail.com";
+                                    String height = (String) jobj.getString("height");
+                                    String eye_color = (String) jobj.getString("eye_color");
+                                    String hair_color = (String) jobj.getString("hair_color");
+                                    String tattoo = (String) jobj.getString("tattoo");
+                                    String sex = (String) jobj.getString("sex");
+                                    String phone = (String) jobj.getString("phone");
+                                    String weight = (String) jobj.getString("weight");
+                                    String marital_status = (String) jobj.getString("marital_status");
+                                    String blood_group = (String) jobj.getString("blood_group");
+                                    String state_of_origin = (String) jobj.getString("state_of_origin");
+                                    String lga = (String) jobj.getString("lga");
+                                    String hometown = (String) jobj.getString("hometown");
+                                    String nin = (String) jobj.getString("nin");
+                                    String genotype = (String) jobj.getString("genotype");
+                                    String sec_sch_year_in = (String) jobj.getString("sec_sch_year_in");
+                                    String sec_sch_year_out = (String) jobj.getString("sec_sch_year_out");
+                                    String nok_name = (String) jobj.getString("nok_name");
+                                    String nok_phone = (String) jobj.getString("nok_phone");
+
+                                    Log.d("fingerprint", name + " " + email);
                                     // store fingerprint in arrayList
 
                                     ArrayList<String> fingeprints = new ArrayList<String>();
-                                    org.json.simple.JSONArray biometrics = new org.json.simple.JSONArray();
-                                    biometrics = (org.json.simple.JSONArray) jobj.get("biometrics");
+                                    JSONArray biometrics = jsonObject.getJSONArray("biometrics");
 
                                     assert biometrics != null;
-                                    int len = biometrics.size();
+                                    int len = biometrics.length();
 
                                     for (int j = 0; j < len; j++) {
-                                        JSONObject json = (JSONObject) biometrics.get(j);
-                                        fingeprints.add((String) json.get("fingerprint"));
+                                        org.json.JSONObject json =  biometrics.getJSONObject(j);
+                                        fingeprints.add((String) json.getString("fingerprint"));
                                         //    Log.d("myProbe", fingeprints.get(j));
                                         byte[] bytes = Base64.decode(fingeprints.get(j), Base64.DEFAULT);
                                         LfsJavaWrapperDefinesMinutiaN[] Probe = deSerialize(bytes);
@@ -255,8 +259,9 @@ public class Login extends AppCompatActivity {
                                         startActivity(new Intent(getApplicationContext(), BioData.class)
                                                 .putExtra("extra", extra)
                                                 .putExtra("army_number", army_number)
-                                                .putExtra("name", name)
+                                                .putExtra("fullname", name)
                                                 .putExtra("age", age)
+                                                .putExtra("email", email)
                                                 .putExtra("height", height)
                                                 .putExtra("eye_color", eye_color)
                                                 .putExtra("hair_color", hair_color)
@@ -276,9 +281,9 @@ public class Login extends AppCompatActivity {
                                                 .putExtra("nok_phone", nok_phone)
 
                                         ); //put all string extras
-                                    if (extra.equalsIgnoreCase("verify"))
-                                        startActivity(new Intent(getApplicationContext(), Enroll.class).putExtra("fullname", name).putExtra("extra", extra));
-                                } catch (ParseException | NullPointerException e) {
+                                    else if (extra.equalsIgnoreCase("verify"))
+                                        startActivity(new Intent(getApplicationContext(), Verify.class).putExtra("fullname", name).putExtra("extra", extra));
+                                } catch (NullPointerException e) {
                                     e.printStackTrace();
                                 }
                             } else {
@@ -301,7 +306,7 @@ public class Login extends AppCompatActivity {
                 }
 
                 @Override
-                public void onFailure(Call<UserResponse> call, Throwable t) {
+                public void onFailure(Call<ArmyUserResponse> call, Throwable t) {
                     progressBar.setVisibility(View.GONE);
                     Toast.makeText(getApplicationContext(), "Network Error", Toast.LENGTH_SHORT).show();
 
