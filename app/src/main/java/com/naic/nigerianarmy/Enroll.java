@@ -689,6 +689,8 @@ private  String mode = "";
                 try {
                     Log.d("fingerprint", "fingerPrintResponse success: " + response.isSuccessful());
                     Log.d("fingerprint", "fingerPrintResponse RESPONSE: " + response.toString());
+                    assert response.errorBody() != null;
+                    Log.d("fingerprint", "fingerPrintResponse ERROR BOdy: " + response.errorBody().string());
 //                    Log.d("fingerprint", "fingerPrintResponse TOKEN: " + response.body().getToken());
 //                    Log.d("fingerprint", "fingerPrintResponse BODY: " + response.body().toString());
 

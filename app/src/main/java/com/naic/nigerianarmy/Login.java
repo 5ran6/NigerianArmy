@@ -200,8 +200,9 @@ public class Login extends AppCompatActivity {
                                     String army_number = (String) jobj.getString("army_number");
                                     String name = (String) jobj.getString("name");
                                     String age = (String) jobj.getString("age");
-                                 //   String email = (String) jobj.getString("email");
-                                    String email = name+"@gmail.com";
+
+                                    String email = jobj.getJSONObject("user").getString("email");
+                                 //   String email = name+"@gmail.com";
                                     String height = (String) jobj.getString("height");
                                     String eye_color = (String) jobj.getString("eye_color");
                                     String hair_color = (String) jobj.getString("hair_color");
