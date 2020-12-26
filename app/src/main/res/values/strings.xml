@@ -1,8 +1,8 @@
 <resources>
     <string name="app_name">Nigerian Army</string>
     <string name="about_text">Automation and integration of real time biometric verification and identification system for the Nigeria Army on a central database. Having a unique staff-identifier-link to their profile, and biometric verification.</string>
-   <string name="base_url">https://www.gamintcorporateltd.com/gamint-army-app/api/</string>
-<!--    <string name="base_url">http://192.168.0.100:8000/api/</string>-->
+ <!--  <string name="base_url">https://www.gamintcorporateltd.com/gamint-army-app/api/</string>-->
+<!--    <string name="base_url">http://192.168.0.106:8000/api/</string>-->
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
 

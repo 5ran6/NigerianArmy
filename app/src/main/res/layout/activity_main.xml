@@ -24,12 +24,28 @@
             android:gravity="center_horizontal"
             android:orientation="vertical">
 
-            <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="120dp"
-                android:foreground="@color/overlay_dark_30"
-                android:scaleType="centerCrop"
-                android:src="@drawable/logo" />
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="120dp"
+                    android:foreground="@color/overlay_dark_30"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/logo" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:onClick="setIpAddress"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:contentDescription="TODO"
+                    android:padding="@dimen/spacing_small"
+                    app:srcCompat="@drawable/ic_settings_black_24dp" />
+
+            </RelativeLayout>
 
             <com.mikhaellopez.circularimageview.CircularImageView
                 android:id="@+id/image"
@@ -81,10 +97,9 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="vertical"
-                android:gravity="center"
                 android:layout_gravity="end"
-                >
+                android:gravity="center"
+                android:orientation="vertical">
 
 
                 <LinearLayout
@@ -109,8 +124,8 @@
                             android:tint="@color/grey_80"
                             app:backgroundTint="@android:color/white"
                             app:elevation="1dp"
-                            app:fabSize="normal"
                             app:fabCustomSize="100dp"
+                            app:fabSize="normal"
                             app:maxImageSize="@dimen/spacing_xxlarge"
                             app:rippleColor="@color/deep_orange_400"
                             app:srcCompat="@drawable/ic_fingerprint_black_24dp" />
@@ -123,6 +138,7 @@
                             android:textAppearance="@style/Base.TextAppearance.AppCompat.Body2" />
 
                     </LinearLayout>
+
                     <View
                         android:layout_width="25dp"
                         android:layout_height="@dimen/spacing_xxxlarge" />
@@ -144,8 +160,8 @@
                             app:backgroundTint="@android:color/white"
                             app:elevation="1dp"
                             app:fabCustomSize="100dp"
-                            app:maxImageSize="@dimen/spacing_xxlarge"
                             app:fabSize="normal"
+                            app:maxImageSize="@dimen/spacing_xxlarge"
                             app:rippleColor="@color/deep_orange_400"
                             app:srcCompat="@drawable/ic_person_black_24dp" />
 
@@ -157,6 +173,7 @@
                             android:textAppearance="@style/Base.TextAppearance.AppCompat.Body2" />
 
                     </LinearLayout>
+
                     <View
                         android:layout_width="25dp"
                         android:layout_height="@dimen/spacing_xxxlarge" />
@@ -174,12 +191,12 @@
                             android:layout_height="wrap_content"
                             android:clickable="true"
                             android:onClick="dashboard"
-                            app:fabCustomSize="100dp"
-                            app:maxImageSize="@dimen/spacing_xxlarge"
                             android:tint="@color/grey_80"
                             app:backgroundTint="@android:color/white"
                             app:elevation="1dp"
+                            app:fabCustomSize="100dp"
                             app:fabSize="normal"
+                            app:maxImageSize="@dimen/spacing_xxlarge"
                             app:rippleColor="@color/deep_orange_400"
                             app:srcCompat="@drawable/ic_folder_shared_black_24dp" />
 
@@ -193,9 +210,11 @@
                     </LinearLayout>
 
                 </LinearLayout>
+
                 <View
                     android:layout_width="0dp"
                     android:layout_height="@dimen/spacing_large" />
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -238,7 +257,7 @@
                         android:layout_width="25dp"
                         android:layout_height="@dimen/spacing_xxxlarge" />
 
-                        <LinearLayout
+                    <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:gravity="center"
@@ -254,8 +273,8 @@
                             app:backgroundTint="@android:color/white"
                             app:elevation="1dp"
                             app:fabCustomSize="100dp"
-                            app:maxImageSize="@dimen/spacing_xxlarge"
                             app:fabSize="normal"
+                            app:maxImageSize="@dimen/spacing_xxlarge"
                             app:rippleColor="@color/deep_orange_400"
                             app:srcCompat="@drawable/ic_info" />
 
@@ -267,6 +286,7 @@
                             android:textAppearance="@style/Base.TextAppearance.AppCompat.Body2" />
 
                     </LinearLayout>
+
                     <View
                         android:layout_width="25dp"
                         android:layout_height="@dimen/spacing_xxxlarge" />
@@ -286,10 +306,10 @@
                             android:onClick="exitApp"
                             android:tint="@color/grey_80"
                             app:backgroundTint="@android:color/white"
-                            app:fabCustomSize="100dp"
-                            app:maxImageSize="@dimen/spacing_xxlarge"
                             app:elevation="1dp"
+                            app:fabCustomSize="100dp"
                             app:fabSize="normal"
+                            app:maxImageSize="@dimen/spacing_xxlarge"
                             app:rippleColor="@color/deep_orange_400"
                             app:srcCompat="@drawable/ic_exit_to_app_black_24dp"
                             tools:ignore="VectorDrawableCompat" />

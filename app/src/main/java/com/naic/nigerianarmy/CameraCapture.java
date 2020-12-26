@@ -1,6 +1,8 @@
 package com.naic.nigerianarmy;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
@@ -48,11 +50,20 @@ public class CameraCapture extends AppCompatActivity {
     private boolean success = false;
     private byte[] byteArray;
 
+    private SharedPreferences sharedPref;
+    private SharedPreferences.Editor editor;
+    private String fromSharedPref = "";
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_camera_capture);
+
+        sharedPref = getPreferences(Context.MODE_PRIVATE);
+        editor = sharedPref.edit();
+        fromSharedPref = sharedPref.getString("address", "nothing is here");
+
         imageViewCompat = findViewById(R.id.imageView);
         home = findViewById(R.id.home);
         progressBar = findViewById(R.id.progress);
@@ -149,7 +160,7 @@ public class CameraCapture extends AppCompatActivity {
         }).build();
 
         Retrofit retrofit = new Retrofit.Builder().client(client)
-                .baseUrl(getString(R.string.base_url))
+                .baseUrl(fromSharedPref)
                 .addConverterFactory(GsonConverterFactory.create()).build();
         NAIC service = retrofit.create(NAIC.class);
 

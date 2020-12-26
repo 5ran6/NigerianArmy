@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+   android:gravity="center" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal"
+    android:id="@+id/parent"
+    android:padding="16dp"
+    android:weightSum="1">
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight=".8"
+        android:hint="Enter IP address or domain name"
+        android:padding="@dimen/spacing_small"
+        app:counterEnabled="false"
+        app:startIconDrawable="@drawable/ic_add">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/ip"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight=".2"
+            android:inputType="text|textWebEditText" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/okay"
+        android:layout_width="wrap_content"
+
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:background="@drawable/btn_rounded_grey"
+        android:text="Okay" />
+
+</LinearLayout>

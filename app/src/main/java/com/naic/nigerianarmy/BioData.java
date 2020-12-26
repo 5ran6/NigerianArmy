@@ -1,6 +1,8 @@
 package com.naic.nigerianarmy;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -34,6 +36,10 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class BioData extends AppCompatActivity {
 
+    private SharedPreferences sharedPref;
+    private SharedPreferences.Editor editor;
+    private String fromSharedPref = "";
+
     ProgressBar progressBar;
     ImageView passport;
     TextInputEditText fullname, email, age, phone, height, weight, eye_color,
@@ -50,6 +56,12 @@ public class BioData extends AppCompatActivity {
     }
 
     private void initializer() {
+
+        sharedPref = getPreferences(Context.MODE_PRIVATE);
+        editor = sharedPref.edit();
+        fromSharedPref = sharedPref.getString("address", "nothing is here");
+
+
         passport = findViewById(R.id.passport);
         progressBar = findViewById(R.id.progress);
         fullname = findViewById(R.id.fullname);
@@ -179,7 +191,8 @@ public class BioData extends AppCompatActivity {
         }).build();
 
         Retrofit retrofit = new Retrofit.Builder().client(client)
-                .baseUrl(getString(R.string.base_url))
+               // .baseUrl(getString(R.string.base_url))
+                .baseUrl(fromSharedPref)
                 .addConverterFactory(GsonConverterFactory.create()).build();
         NAIC service = retrofit.create(NAIC.class);
 

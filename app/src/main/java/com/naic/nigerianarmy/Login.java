@@ -1,6 +1,8 @@
 package com.naic.nigerianarmy;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Base64;
 import android.util.Log;
@@ -59,10 +61,17 @@ public class Login extends AppCompatActivity {
     private AppCompatImageView img;
     private String mode;
 
+    private SharedPreferences sharedPref;
+    private SharedPreferences.Editor editor;
+    private String fromSharedPref = "";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login_with_number);
+        sharedPref = getPreferences(Context.MODE_PRIVATE);
+        editor = sharedPref.edit();
+        fromSharedPref = sharedPref.getString("address", "nothing is here");
 
         extra = getIntent().getStringExtra("extra");
         bip = findViewById(R.id.bippiis_no);
@@ -149,7 +158,8 @@ public class Login extends AppCompatActivity {
             }).build();
 
             Retrofit retrofit = new Retrofit.Builder().client(client)
-                    .baseUrl(getString(R.string.base_url))
+                    // .baseUrl(getString(R.string.base_url))
+                    .baseUrl(fromSharedPref)
                     .addConverterFactory(GsonConverterFactory.create()).build();
             NAIC service = retrofit.create(NAIC.class);
 
@@ -195,14 +205,14 @@ public class Login extends AppCompatActivity {
                                     org.json.JSONObject jsonObject = new org.json.JSONObject(jsonobj_1);
 
 //                                    JSONObject jobj = (JSONObject) jsonobj_1.get("profile");
-                                    org.json.JSONObject jobj =  jsonObject.getJSONObject("profile");
+                                    org.json.JSONObject jobj = jsonObject.getJSONObject("profile");
 
                                     String army_number = (String) jobj.getString("army_number");
                                     String name = (String) jobj.getString("name");
                                     String age = (String) jobj.getString("age");
 
                                     String email = jobj.getJSONObject("user").getString("email");
-                                 //   String email = name+"@gmail.com";
+                                    //   String email = name+"@gmail.com";
                                     String height = (String) jobj.getString("height");
                                     String eye_color = (String) jobj.getString("eye_color");
                                     String hair_color = (String) jobj.getString("hair_color");
@@ -232,7 +242,7 @@ public class Login extends AppCompatActivity {
                                     int len = biometrics.length();
 
                                     for (int j = 0; j < len; j++) {
-                                        org.json.JSONObject json =  biometrics.getJSONObject(j);
+                                        org.json.JSONObject json = biometrics.getJSONObject(j);
                                         fingeprints.add((String) json.getString("fingerprint"));
                                         //    Log.d("myProbe", fingeprints.get(j));
                                         byte[] bytes = Base64.decode(fingeprints.get(j), Base64.DEFAULT);

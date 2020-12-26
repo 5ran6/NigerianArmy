@@ -6,6 +6,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.hardware.usb.UsbDevice;
@@ -89,6 +90,9 @@ public class Verify extends AppCompatActivity
     private PendingIntent mPermissionIntent = null;
     //
 
+    private SharedPreferences sharedPref;
+    private SharedPreferences.Editor editor;
+    private String fromSharedPref = "";
 
     private static BioMiniFactory mBioMiniFactory = null;
     public static final int REQUEST_WRITE_PERMISSION = 786;
@@ -309,6 +313,9 @@ public class Verify extends AppCompatActivity
         GB_AcquisitionOptionsGlobals.BOZORTH_Jw = new BozorthJavaWrapperLibrary();
 
         setContentView(R.layout.activity_enroll);
+        sharedPref = getPreferences(Context.MODE_PRIVATE);
+        editor = sharedPref.edit();
+        fromSharedPref = sharedPref.getString("address", "nothing is here");
 
         mCaptureOptionDefault.frameRate = IBioMiniDevice.FrameRate.SHIGH;
         bippiis_number = getIntent().getStringExtra("bippiis_number");
@@ -658,7 +665,7 @@ public class Verify extends AppCompatActivity
         }).build();
 
         Retrofit retrofit = new Retrofit.Builder().client(client)
-                .baseUrl(getString(R.string.base_url))
+                .baseUrl(fromSharedPref)
                 .addConverterFactory(GsonConverterFactory.create()).build();
         NAIC service = retrofit.create(NAIC.class);
 

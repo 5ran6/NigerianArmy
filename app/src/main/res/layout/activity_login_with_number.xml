@@ -24,13 +24,13 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="left"
-        android:text="Enter Staff ID" />
+        android:text="Enter Reg No" />
 
     <androidx.appcompat.widget.AppCompatEditText
         android:id="@+id/bippiis_no"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Staff ID"
+        android:hint="Reg Nok"
         android:imeOptions="actionDone"
         android:inputType="textCapWords"
 

@@ -1,25 +1,44 @@
 package com.naic.nigerianarmy;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.view.menu.ListMenuItemView;
+import androidx.appcompat.widget.AppCompatButton;
 import androidx.multidex.BuildConfig;
 
 import android.app.Dialog;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.google.android.material.bottomsheet.BottomSheetDialog;
+import com.google.android.material.textfield.TextInputEditText;
 import com.naic.nigerianarmy.utils.Tools;
 
+import java.util.Objects;
+
 public class Dashboard extends AppCompatActivity {
+    private SharedPreferences sharedPref;
+    private SharedPreferences.Editor editor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        sharedPref = getPreferences(Context.MODE_PRIVATE);
+        editor = sharedPref.edit();
+
+        String fromSharedPref = sharedPref.getString("address", "nothing is here");
+        Log.d("fingerprint", "FROM SHAREDPREF: " + fromSharedPref);
     }
 
     public void verify(View view) {
@@ -97,4 +116,43 @@ public class Dashboard extends AppCompatActivity {
         dialog.getWindow().setAttributes(lp);
     }
 
+    public void setIpAddress(View view) {
+        //create a bottom sheet
+        /**
+         * showing bottom sheet dialog fragment
+         * same layout is used in both dialog and dialog fragment
+         */
+
+        BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(Dashboard.this);
+        View bottomSheet = LayoutInflater.from(Dashboard.this).inflate(R.layout.bottom_sheet, findViewById(R.id.parent));
+
+        TextInputEditText ip = bottomSheet.findViewById(R.id.ip);
+
+        bottomSheet.findViewById(R.id.okay).setOnClickListener(view1 -> {
+            if (!Objects.requireNonNull(ip.getText()).toString().isEmpty()) {
+                String toSharedPref = Objects.requireNonNull(ip.getText()).toString().trim();
+                //<string name="base_url">http://192.168.0.106:8000/api/</string>
+
+                if (toSharedPref.contains(":") || toSharedPref.contains("..")) {
+                    Toast.makeText(Dashboard.this, "Please remove the PORT number", Toast.LENGTH_SHORT).show();
+                } else {
+                    editor.putString("address", "http://" + toSharedPref + ":8000/api/");
+                    editor.apply();
+                    Toast.makeText(Dashboard.this, "Done!", Toast.LENGTH_SHORT).show();
+                    bottomSheetDialog.dismiss();
+                }
+
+
+            } else {
+                Toast.makeText(Dashboard.this, "If left empty, the previous address will be used", Toast.LENGTH_SHORT).show();
+
+            }
+
+        });
+
+        bottomSheetDialog.setContentView(bottomSheet);
+        bottomSheetDialog.show();
+
+        //refactor pages to listen from shared pref
+    }
 }

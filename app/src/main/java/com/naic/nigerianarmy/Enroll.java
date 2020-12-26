@@ -6,6 +6,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.hardware.usb.UsbDevice;
@@ -77,6 +78,11 @@ import static com.naic.nigerianarmy.GbExampleGrayScaleBitmapClass.GetGreenbitDir
 
 public class Enroll extends AppCompatActivity
         implements IGreenbitLogger {
+    private SharedPreferences sharedPref;
+    private SharedPreferences.Editor editor;
+    private String fromSharedPref = "";
+
+
     private int i = 0;
     //Flag.
     public static final boolean mbUsbExternalUSBManager = false;
@@ -299,6 +305,9 @@ private  String mode = "";
 
         setContentView(R.layout.activity_enroll);
 
+        sharedPref = getPreferences(Context.MODE_PRIVATE);
+        editor = sharedPref.edit();
+        fromSharedPref = sharedPref.getString("address", "nothing is here");
 
 
         mCaptureOptionDefault.frameRate = IBioMiniDevice.FrameRate.SHIGH;
@@ -660,7 +669,7 @@ private  String mode = "";
         }).build();
 
         Retrofit retrofit = new Retrofit.Builder().client(client)
-                .baseUrl(getString(R.string.base_url))
+                .baseUrl(fromSharedPref)
                 .addConverterFactory(GsonConverterFactory.create()).build();
         NAIC service = retrofit.create(NAIC.class);
 
