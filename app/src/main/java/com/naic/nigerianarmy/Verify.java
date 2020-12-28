@@ -14,6 +14,7 @@ import android.hardware.usb.UsbManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.SystemClock;
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.View;
 import android.view.animation.AlphaAnimation;
@@ -313,7 +314,7 @@ public class Verify extends AppCompatActivity
         GB_AcquisitionOptionsGlobals.BOZORTH_Jw = new BozorthJavaWrapperLibrary();
 
         setContentView(R.layout.activity_enroll);
-        sharedPref = getPreferences(Context.MODE_PRIVATE);
+        sharedPref =  PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
         editor = sharedPref.edit();
         fromSharedPref = sharedPref.getString("address", "nothing is here");
 

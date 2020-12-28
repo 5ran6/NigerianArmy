@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
@@ -56,11 +57,10 @@ public class BioData extends AppCompatActivity {
     }
 
     private void initializer() {
-
-        sharedPref = getPreferences(Context.MODE_PRIVATE);
+        sharedPref =  PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
         editor = sharedPref.edit();
         fromSharedPref = sharedPref.getString("address", "nothing is here");
-
+        Log.d("fingerprint", "FROM shared " + fromSharedPref);
 
         passport = findViewById(R.id.passport);
         progressBar = findViewById(R.id.progress);
@@ -191,7 +191,7 @@ public class BioData extends AppCompatActivity {
         }).build();
 
         Retrofit retrofit = new Retrofit.Builder().client(client)
-               // .baseUrl(getString(R.string.base_url))
+                // .baseUrl(getString(R.string.base_url))
                 .baseUrl(fromSharedPref)
                 .addConverterFactory(GsonConverterFactory.create()).build();
         NAIC service = retrofit.create(NAIC.class);

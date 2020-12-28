@@ -7,6 +7,7 @@ import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
+import android.preference.PreferenceManager;
 import android.provider.MediaStore;
 import android.util.Base64;
 import android.util.Log;
@@ -60,7 +61,7 @@ public class CameraCapture extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_camera_capture);
 
-        sharedPref = getPreferences(Context.MODE_PRIVATE);
+        sharedPref =  PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
         editor = sharedPref.edit();
         fromSharedPref = sharedPref.getString("address", "nothing is here");
 
